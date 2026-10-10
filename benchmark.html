@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- 让页面宽度适配浏览器窗口 -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>长会话渲染性能测试</title>
+  </head>
+
+  <body>
+    <!-- Vue测试页面最终会挂载到这里 -->
+    <div id="app"></div>
+
+    <!-- 加载我们下一步要创建的测试入口文件 -->
+    <script
+      type="module"
+      src="/src/benchmark/main.ts"
+    ></script>
+  </body>
+</html>

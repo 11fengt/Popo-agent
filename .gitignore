@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dist-benchmark/
+.vite/
+.npm-cache/
+.tmp-*/
+.env
+.env.*
+!.env.example
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
