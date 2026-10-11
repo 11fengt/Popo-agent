@@ -12,6 +12,35 @@ Popo-agent 是一个面向个人文档问答的全栈 AI Agent 项目。用户�
 
 > 截图展示本地运行效果，仓库未提供在线托管服务。真实聊天与文档向量化需要自己的 Qwen API Key；知识库功能还需要启动本地 Chroma 服务。
 
+## 🛠 技术栈
+
+### 前端
+- **Vue 3 + TypeScript + vite**
+- **Pinia**：管理会话、消息、知识库列表和生成状态
+- **vue-virtual-scroller**：动态高度虚拟列表，优化长会话渲染
+- **markdown-it + DOMPurify**：Markdown 渲染与 HTML 清理
+- **Fetch + ReadableStream + SSE**：接收流式文本、工具状态与引用
+- **AbortController**：中断正在进行的对话请求
+
+### 后端
+- **Node.js + Express**：提供 HTTP API、SSE 流式接口与静态资源服务
+- **Multer**：接收文档上传
+- **pdf-parse**：提取 PDF 文本与页码
+- **Mammoth**：解析 Word（.docx）文档
+- **MCP SDK + Zod**：实现工具协议通信与工具输入校验
+
+### 数据存储
+- **ChromaDB**：持久化文档切片、向量与来源元数据
+- **localStorage**：保存浏览器聊天历史与当前会话
+
+### AI 与检索
+- **Qwen Chat Completions**：多轮对话、工具决策与流式生成
+- **Qwen Embedding**：将文档片段和用户问题转换为向量
+- **结构化文档分块**：结合标题、段落、页码与估算 token 预算切片
+- **BM25**：关键词召回，补充精确词匹配
+- **RRF**：融合向量与关键词两路检索排名
+- **MCP + Function Calling**：执行工具并将结果回填给模型
+
 ## 功能概览
 
 | 模块 | 当前实现 |
@@ -31,12 +60,11 @@ Popo-agent 是一个面向个人文档问答的全栈 AI Agent 项目。用户�
 
 | 方面 | 初始版本 | 当前版本 |
 | --- | --- | --- |
-| 文档格式 | UTF-8 文本、Markdown、JSON | Markdown、TXT、PDF、DOCX；JSON 上传不再支持 |
+| 文档格式 | UTF-8 文本、Markdown | Markdown、TXT、PDF、DOCX |
 | 分块 | 900 字符一块，重叠 160 字符 | 结构块 + 约 500 个估算 token 的目标预算 |
 | 存储 | MCP 进程内存 | ChromaDB 持久化与余弦距离索引 |
 | 检索 | 单路向量相似度排序 | 向量 + BM25 + RRF |
 | 来源 | 文档名与片段 | 增加章节、页码、两路排名与融合分数 |
-| 模型执行 | 非流式工具规划后再流式回答 | 规划与回答统一流式处理，完整参数才执行工具 |
 | 请求取消 | 主要停止客户端接收 | AbortSignal 传递到模型 HTTP 请求与 MCP 调用 |
 
 ## 技术栈
@@ -175,7 +203,6 @@ Vite 将 `/api` 代理到 `8787`。修改 `SERVER_PORT` 时需同步修改 `vite
 | `.pdf` | pdf-parse 按页提取文本，页内按段落组织 | 起止页码 |
 | `.docx` | Mammoth 转 Markdown 后解析 | 章节和段落；没有 Word 页码 |
 
-不支持扫描 PDF 的 OCR、旧版 `.doc`、JSON 或图片知识文档。无足够可提取文字的 PDF 返回专门错误。文件名处理会去掉客户端路径，并尝试修复 UTF-8 被误解码为 Latin-1 导致的中文乱码。
 
 [document-processing.js](server/document-processing.js)使用目标约 500、正文上限预算 650、最小聚合阈值 280 个估算 token。章节变化时结束当前切片；超长段落先按句子拆分，必要时按字符预算切分，相邻拆分段保留约 80 个估算 token 的尾部重叠。
 
@@ -268,7 +295,7 @@ sequenceDiagram
 | `clear_knowledge_documents` | 无 | 清空知识库 |
 | `get_current_time` | 无 | 当前时间 |
 
-六个工具都会映射给模型，目前未为知识库写操作增加人工确认。完整请求、响应和错误示例见 [docs/API.md](docs/API.md)。
+六个工具都会映射给模型。完整请求、响应和错误示例见 [docs/API.md](docs/API.md)。
 
 ## 检索评测
 
@@ -282,8 +309,6 @@ sequenceDiagram
 | 向量 + BM25 + RRF | 30 / 32 | 93.75% |
 
 这组题多命中 5 题，提升约 15.6 个百分点。结果来自提供的历史报告，本次发布未重新调用模型评测，不代表所有知识库上的通用提升。
-
-报告沿用 `Recall@3` 名称；实际统计“每题 Top 3 至少命中一个相关切片”的题目比例，更接近 Hit Rate@3。脚本在指定文档与页码范围内按证据关键词覆盖率选择相关切片，`referenceAnswer` 供人工复核，不用于自动判断最终回答。数据集只有正例，没有覆盖无答案场景。
 
 复测需自行准备并有权使用数据集列出的四份原文；仓库不打包本机数据库或原始制度文件。上传文档并启动 Chroma 后执行：
 
@@ -364,16 +389,6 @@ Popo-agent/
 └─ .env.example                # 配置模板
 ```
 
-## 当前边界
-
-- 面向本地单用户：没有登录、用户知识库隔离、服务端限流或上传大小/数量限制。上传使用内存缓冲，Express 默认绑定 `127.0.0.1`。
-- RAG 开关是提示词约束，服务端没有移除检索工具。
-- 不做 OCR，不支持图片内容理解、联网搜索或独立重排模型。
-- 语音 Hook 仍保留，输入组件中的语音按钮被注释，当前界面没有入口。
-- Markdown 关闭原始 HTML，模型输出的 `<br>` 会显示为文本，包括截图中的表格换行标签。
-- 聊天记录不跨设备同步，localStorage 有容量限制；知识库使用同一个 Chroma 集合。
-- 取消阻止继续输出和后续调用，但不能撤销已完成的上游计算或写操作。
-- 检索命中率不等于回答准确率；当前没有真实模型全链路自动化测试或浏览器端到端测试。
 
 后续方向：按用户授权、上传与资源限制、重排、无答案评测、可验证的引用定位，以及实际模型链路测试。
 
@@ -384,7 +399,3 @@ Popo-agent/
 3. [MCP Server](server/mcp-server.js)：如何将能力注册成工具。
 4. [流式执行](server/chat-stream.js)与[Express](server/index.js)：如何拼接参数、执行工具并持续输出。
 5. [会话 Store](src/stores/chat.ts)与[聊天列表](src/components/ChatPanel.vue)：如何保持会话与优化长列表。
-
-## License
-
-[MIT](LICENSE) · Copyright (c) 2026 Tengfeng Wang。第三方依赖与素材遵循各自许可。
