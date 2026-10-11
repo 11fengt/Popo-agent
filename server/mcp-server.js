@@ -3,20 +3,74 @@ import path from 'node:path';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
+import { chunkDocumentBlocks, parseTextDocument, SUPPORTED_DOCUMENT_EXTENSIONS } from './document-processing.js';
+import { createKnowledgeStore } from './knowledge-store.js';
+import { buildBm25Index, reciprocalRankFusion, searchBm25, tokenize } from './retrieval.js';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 dotenv.config();
 
 const state = {
   documents: [],
-  chunks: []
+  chunks: [],
+  bm25Index: buildBm25Index([])
 };
 
 const config = {
   apiKey: process.env.QWEN_API_KEY,
   baseUrl: (process.env.QWEN_BASE_URL || 'https://dashscope.aliyuncs.com/compatible-mode/v1').replace(/\/$/, ''),
-  embeddingModel: process.env.QWEN_EMBEDDING_MODEL || 'text-embedding-v3'
+  embeddingModel: process.env.QWEN_EMBEDDING_MODEL || 'text-embedding-v3',
+  chromaHost: process.env.CHROMA_HOST || '127.0.0.1',
+  chromaPort: Number(process.env.CHROMA_PORT || 8000),
+  chromaSsl: process.env.CHROMA_SSL === 'true',
+  chromaCollection: process.env.CHROMA_COLLECTION || 'yuan_agent_knowledge'
 };
+
+const knowledgeStore = createKnowledgeStore({
+  host: config.chromaHost,
+  port: config.chromaPort,
+  ssl: config.chromaSsl,
+  collectionName: config.chromaCollection
+});
+
+let knowledgeStatePromise = null;
+
+async function ensureKnowledgeState() {
+  if (!knowledgeStatePromise) {
+    knowledgeStatePromise = (async () => {
+      const chunks = await knowledgeStore.listChunks();
+      const documents = new Map();
+
+      state.chunks = chunks.map((chunk) => ({
+        ...chunk,
+        tokens: tokenize(chunk.text)
+      }));
+
+      for (const chunk of state.chunks) {
+        if (!documents.has(chunk.documentId)) {
+          documents.set(chunk.documentId, {
+            id: chunk.documentId,
+            name: chunk.documentName,
+            content: '',
+            createdAt: chunk.createdAt,
+            fileType: chunk.fileType,
+            chunkCount: 1
+          });
+        } else {
+          documents.get(chunk.documentId).chunkCount += 1;
+        }
+      }
+
+      state.documents = [...documents.values()];
+      state.bm25Index = buildBm25Index(state.chunks);
+    })().catch((error) => {
+      knowledgeStatePromise = null;
+      throw error;
+    });
+  }
+
+  return knowledgeStatePromise;
+}
 
 function uid(prefix) {
   return `${prefix}-${crypto.randomUUID()}`;
@@ -28,40 +82,6 @@ function createAppError(code, message, details = '', status = 500) {
   error.details = details;
   error.status = status;
   return error;
-}
-
-function tokenize(input) {
-  return input
-    .toLowerCase()
-    .replace(/[`*_>#\-\[\]\(\)]/g, ' ')
-    .split(/[\s，。；：！？、,.!?;:\/\\|]+/)
-    .filter((token) => token.length > 1);
-}
-
-function chunkText(text, chunkSize = 900, overlap = 160) {
-  const chunks = [];
-  let start = 0;
-  while (start < text.length) {
-    const end = Math.min(text.length, start + chunkSize);
-    const value = text.slice(start, end).trim();
-    if (value) chunks.push(value);
-    start += chunkSize - overlap;
-  }
-  return chunks;
-}
-
-function cosineSimilarity(a, b) {
-  const len = Math.min(a.length, b.length);
-  let dot = 0;
-  let normA = 0;
-  let normB = 0;
-  for (let index = 0; index < len; index += 1) {
-    dot += a[index] * b[index];
-    normA += a[index] * a[index];
-    normB += b[index] * b[index];
-  }
-  if (!normA || !normB) return 0;
-  return dot / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
 async function qwenFetch(endpoint, body) {
@@ -118,38 +138,71 @@ async function createEmbedding(text) {
   return vector;
 }
 
-function buildCitation(chunk, score) {
+function buildCitation(result) {
+  const { chunk } = result;
+  const retrievalDetails = [];
+  if (result.vectorRank !== null) retrievalDetails.push(`向量 #${result.vectorRank}`);
+  if (result.keywordRank !== null) retrievalDetails.push(`BM25 #${result.keywordRank}`);
+  const locations = [];
+  if (chunk.heading) locations.push(chunk.heading);
+  if (chunk.pageStart) {
+    locations.push(chunk.pageEnd > chunk.pageStart
+      ? `第 ${chunk.pageStart}-${chunk.pageEnd} 页`
+      : `第 ${chunk.pageStart} 页`);
+  }
+  const sourceLocation = locations.length ? ` / ${locations.join(' / ')}` : '';
+
   return {
     id: chunk.id,
     title: chunk.documentName,
     snippet: chunk.text,
-    source: `向量知识库 / ${chunk.documentName}`,
-    score: Number(score.toFixed(4))
+    source: `混合检索 / ${chunk.documentName}${sourceLocation}${retrievalDetails.length ? `（${retrievalDetails.join(' · ')}）` : ''}`,
+    score: Number(result.rrfScore.toFixed(4)),
+    retrieval: {
+      vectorRank: result.vectorRank,
+      vectorScore: result.vectorScore === null ? null : Number(result.vectorScore.toFixed(4)),
+      keywordRank: result.keywordRank,
+      bm25Score: result.bm25Score === null ? null : Number(result.bm25Score.toFixed(4)),
+      rrfScore: Number(result.rrfScore.toFixed(6))
+    }
   };
 }
 
+async function searchByVector(query, limit) {
+  const queryEmbedding = await createEmbedding(query);
+  const results = await knowledgeStore.searchByVector(queryEmbedding, limit);
+  return results.filter((item) => item.score > 0.15);
+}
+
 async function searchKnowledge(query, topK = 4) {
+  await ensureKnowledgeState();
+
   if (!state.chunks.length) {
     return [];
   }
 
-  const queryEmbedding = await createEmbedding(query);
-  return state.chunks
-    .map((chunk) => ({
-      chunk,
-      score: cosineSimilarity(queryEmbedding, chunk.embedding)
-    }))
-    .filter((item) => item.score > 0.15)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, topK)
-    .map(({ chunk, score }) => buildCitation(chunk, score));
+  const candidateLimit = Math.min(state.chunks.length, Math.max(topK * 5, 20));
+  const keywordResults = searchBm25(state.bm25Index, query, candidateLimit);
+  const vectorResults = await searchByVector(query, candidateLimit);
+
+  return reciprocalRankFusion(vectorResults, keywordResults, topK)
+    .map((result) => buildCitation(result));
 }
 
 async function ingestDocuments(documents) {
-  const supported = documents.filter((document) => /\.(txt|md|markdown|json)$/i.test(document.name));
+  await ensureKnowledgeState();
+
+  const supported = documents.filter((document) =>
+    SUPPORTED_DOCUMENT_EXTENSIONS.some((extension) => document.name.toLowerCase().endsWith(extension))
+  );
 
   if (!supported.length) {
-    throw createAppError('UNSUPPORTED_FILES', '没有可导入的知识文件', '仅支持 `.md`、`.markdown`、`.txt`、`.json` 文件。', 400);
+    throw createAppError(
+      'UNSUPPORTED_FILES',
+      '没有可导入的知识文件',
+      '仅支持 Markdown（.md、.markdown）、TXT、文本型 PDF 和 Word（.docx）。',
+      400
+    );
   }
 
   const inserted = [];
@@ -157,28 +210,45 @@ async function ingestDocuments(documents) {
   const nextChunks = [];
 
   for (const source of supported) {
-    const content = source.content.trim();
-    if (!content) continue;
+    const blocks = Array.isArray(source.blocks) && source.blocks.length
+      ? source.blocks
+      : parseTextDocument(source.name, source.content || '');
+    const parts = chunkDocumentBlocks(blocks);
+    if (!parts.length) continue;
 
     const document = {
       id: uid('doc'),
       name: source.name,
-      content,
-      createdAt: Date.now()
+      content: '',
+      createdAt: Date.now(),
+      fileType: source.fileType || source.name.split('.').pop()?.toLowerCase() || 'unknown',
+      chunkCount: parts.length
     };
 
     nextDocuments.push(document);
-    inserted.push({ id: document.id, name: document.name, createdAt: document.createdAt });
+    inserted.push({
+      id: document.id,
+      name: document.name,
+      createdAt: document.createdAt,
+      fileType: document.fileType,
+      chunkCount: parts.length
+    });
 
-    const parts = chunkText(content);
-    for (const part of parts) {
-      const embedding = await createEmbedding(part);
+    for (const [chunkIndex, part] of parts.entries()) {
+      const embedding = await createEmbedding(part.text);
       nextChunks.push({
         id: uid('chunk'),
         documentId: document.id,
         documentName: document.name,
-        text: part,
-        tokens: tokenize(part),
+        chunkIndex,
+        createdAt: document.createdAt,
+        fileType: document.fileType,
+        heading: part.heading,
+        pageStart: part.pageStart,
+        pageEnd: part.pageEnd,
+        blockType: part.type,
+        text: part.text,
+        tokens: tokenize(part.text),
         embedding
       });
     }
@@ -188,35 +258,48 @@ async function ingestDocuments(documents) {
     throw createAppError('EMPTY_FILES', '上传的文件内容为空', '请确认文件不是空文件，且编码为 UTF-8。', 400);
   }
 
+  await knowledgeStore.upsertChunks(nextChunks);
+
   state.documents.push(...nextDocuments);
-  state.chunks.push(...nextChunks);
+  state.chunks.push(...nextChunks.map(({ embedding: _, ...chunk }) => chunk));
+  state.bm25Index = buildBm25Index(state.chunks);
 
   return inserted;
 }
 
-function listDocuments() {
+async function listDocuments() {
+  await ensureKnowledgeState();
   return state.documents.map((document) => ({
     id: document.id,
     name: document.name,
-    createdAt: document.createdAt
+    createdAt: document.createdAt,
+    fileType: document.fileType,
+    chunkCount: document.chunkCount
   }));
 }
 
-function deleteDocument(id) {
-  const before = state.documents.length;
-  state.documents = state.documents.filter((document) => document.id !== id);
-  state.chunks = state.chunks.filter((chunk) => chunk.documentId !== id);
+async function deleteDocument(id) {
+  await ensureKnowledgeState();
 
-  if (before === state.documents.length) {
+  const before = state.documents.length;
+  if (!state.documents.some((document) => document.id === id)) {
     throw createAppError('DOCUMENT_NOT_FOUND', '知识文件不存在', '请确认传入的文档 ID 是否正确。', 404);
   }
 
-  return { ok: true, id };
+  await knowledgeStore.deleteDocument(id);
+  state.documents = state.documents.filter((document) => document.id !== id);
+  state.chunks = state.chunks.filter((chunk) => chunk.documentId !== id);
+  state.bm25Index = buildBm25Index(state.chunks);
+
+  return { ok: before > state.documents.length, id };
 }
 
-function clearDocuments() {
+async function clearDocuments() {
+  await ensureKnowledgeState();
+  await knowledgeStore.clear();
   state.documents = [];
   state.chunks = [];
+  state.bm25Index = buildBm25Index([]);
   return { ok: true };
 }
 
@@ -243,7 +326,8 @@ function toErrorContent(error) {
     structuredContent: {
       code: error.code || 'UNKNOWN_ERROR',
       message: error.message,
-      details: error.details || ''
+      details: error.details || '',
+      status: error.status || 500
     },
     isError: true
   };
@@ -257,7 +341,7 @@ const server = new McpServer({
 server.registerTool(
   'retrieve_knowledge',
   {
-    description: '从后端向量知识库检索与用户问题最相关的文档片段',
+    description: '通过向量语义召回、BM25 关键词召回与 RRF 融合，从知识库检索最相关的文档片段',
     inputSchema: z.object({
       query: z.string().min(1, 'query 不能为空'),
       topK: z.number().int().min(1).max(10).optional()
@@ -279,18 +363,34 @@ server.registerTool(
     description: '列出当前后端知识库中的文档',
     inputSchema: z.object({})
   },
-  async () => toTextContent({ documents: listDocuments() })
+  async () => {
+    try {
+      return toTextContent({ documents: await listDocuments() });
+    } catch (error) {
+      return toErrorContent(error);
+    }
+  }
 );
 
 server.registerTool(
   'ingest_knowledge_documents',
   {
-    description: '导入知识文档到向量知识库中并建立向量索引',
+    description: '导入已解析的 Markdown、TXT、文本型 PDF 或 DOCX 文档，并建立结构化向量索引',
     inputSchema: z.object({
       documents: z.array(
         z.object({
           name: z.string().min(1, 'name 不能为空'),
-          content: z.string().min(1, 'content 不能为空')
+          fileType: z.string().optional(),
+          content: z.string().optional(),
+          blocks: z.array(
+            z.object({
+              text: z.string().min(1, 'block text 不能为空'),
+              type: z.string().optional(),
+              heading: z.string().optional(),
+              pageStart: z.number().int().nonnegative().optional(),
+              pageEnd: z.number().int().nonnegative().optional()
+            })
+          ).optional()
         })
       ).min(1, '至少导入一份文档')
     })
@@ -315,7 +415,7 @@ server.registerTool(
   },
   async ({ id }) => {
     try {
-      return toTextContent(deleteDocument(id));
+      return toTextContent(await deleteDocument(id));
     } catch (error) {
       return toErrorContent(error);
     }
@@ -328,7 +428,13 @@ server.registerTool(
     description: '清空知识库中的所有文档与向量索引',
     inputSchema: z.object({})
   },
-  async () => toTextContent(clearDocuments())
+  async () => {
+    try {
+      return toTextContent(await clearDocuments());
+    } catch (error) {
+      return toErrorContent(error);
+    }
+  }
 );
 
 server.registerTool(

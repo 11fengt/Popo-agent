@@ -327,15 +327,20 @@ button:disabled {
 }
 
 .session-list {
-  max-height: 260px;
+  max-height: 350px;
   overflow: auto;
   overscroll-behavior: contain;
   padding-right: 4px;
 }
 
 .session-card {
-  justify-content: space-between;
-  padding: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  gap: 8px;
+  padding: 12px 10px 12px 14px;
   border-radius: 18px;
   background: var(--panel);
   border: 1px solid transparent;
@@ -350,6 +355,12 @@ button:disabled {
 
 .session-card-body {
   min-width: 0;
+  overflow: hidden;
+}
+
+.session-delete {
+  justify-self: end;
+  white-space: nowrap;
 }
 
 .session-card-body strong,
@@ -634,6 +645,27 @@ button:disabled {
   padding-right: 4px;
 }
 
+.knowledge-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.knowledge-item-body {
+  min-width: 0;
+}
+
+.knowledge-item strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.knowledge-item .inline-link {
+  justify-self: end;
+  white-space: nowrap;
+}
+
 .inline-link {
   color: var(--accent-strong);
 }
@@ -735,7 +767,7 @@ button:disabled {
   }
 
   .app-layout.sidebar-open {
-    grid-template-columns: 320px minmax(0, 1fr);
+    grid-template-columns: 370px minmax(0, 1fr);
   }
 
   .app-layout:not(.sidebar-open) .sidebar-shell {
@@ -796,11 +828,9 @@ button:disabled {
   .topbar-right,
   .composer-toolbar,
   .composer-footer,
-  .knowledge-item,
   .knowledge-header,
   .tool-topline,
-  .source-title-line,
-  .session-card {
+  .source-title-line {
     align-items: flex-start;
     flex-direction: column;
   }

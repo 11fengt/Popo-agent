@@ -6,6 +6,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Client as McpClient } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+import { parseUploadedDocument } from './document-processing.js';
+import { runStreamingChat } from './chat-stream.js';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 dotenv.config();
@@ -51,7 +53,7 @@ function getErrorPayload(error, fallbackMessage) {
   };
 }
 
-async function qwenFetch(endpoint, body, stream = false) {
+async function qwenFetch(endpoint, body, stream = false, signal) {
   if (!config.apiKey) {
     throw createAppError('MISSING_API_KEY', '缺少 Qwen API Key', '请检查服务端 `.env.local` 中的 `QWEN_API_KEY` 配置。', 500);
   }
@@ -64,9 +66,11 @@ async function qwenFetch(endpoint, body, stream = false) {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${config.apiKey}`
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+      signal
     });
-  } catch {
+  } catch (error) {
+    if (signal?.aborted) throw error;
     throw createAppError(
       'NETWORK_UNREACHABLE',
       '无法连接到 Qwen 服务',
@@ -96,6 +100,7 @@ async function qwenFetch(endpoint, body, stream = false) {
 }
 
 function sendSse(res, event, data) {
+  if (res.destroyed || res.writableEnded) return;
   res.write(`event: ${event}\n`);
   res.write(`data: ${JSON.stringify(data)}\n\n`);
 }
@@ -190,13 +195,13 @@ function buildToolDefinitions(tools) {
   }));
 }
 
-async function executeToolCallWithMcp(client, toolCall) {
+async function executeToolCallWithMcp(client, toolCall, signal) {
   const name = toolCall.function?.name || 'unknown';
   const args = toolCall.function?.arguments ? JSON.parse(toolCall.function.arguments) : {};
   const result = await client.callTool({
     name,
     arguments: args
-  });
+  }, undefined, { signal });
 
   const structured = normalizeStructuredContent(result);
   const text = contentToText(result);
@@ -220,6 +225,14 @@ app.get('/api/health', async (_, res) => {
     });
 
     const structured = normalizeStructuredContent(result);
+    if (result.isError) {
+      throw createAppError(
+        structured.code || 'MCP_TOOL_ERROR',
+        structured.message || 'MCP 健康检查失败',
+        structured.details || '',
+        structured.status || 503
+      );
+    }
     res.json({
       ok: true,
       documents: Array.isArray(structured.documents) ? structured.documents.length : 0,
@@ -245,6 +258,14 @@ app.get('/api/knowledge', async (_, res) => {
     });
 
     const structured = normalizeStructuredContent(result);
+    if (result.isError) {
+      throw createAppError(
+        structured.code || 'MCP_TOOL_ERROR',
+        structured.message || '加载知识库失败',
+        structured.details || '',
+        structured.status || 503
+      );
+    }
     res.json({
       documents: structured.documents || []
     });
@@ -261,20 +282,23 @@ app.get('/api/knowledge', async (_, res) => {
 app.post('/api/knowledge/upload', upload.array('files'), async (req, res) => {
   try {
     const files = Array.isArray(req.files) ? req.files : [];
+    const documents = await Promise.all(files.map((file) => parseUploadedDocument(file)));
     const session = await createMcpSession();
     const result = await session.client.callTool({
       name: 'ingest_knowledge_documents',
       arguments: {
-        documents: files.map((file) => ({
-          name: file.originalname,
-          content: file.buffer.toString('utf-8')
-        }))
+        documents
       }
     });
 
     const structured = normalizeStructuredContent(result);
     if (result.isError) {
-      throw createAppError(structured.code || 'MCP_TOOL_ERROR', structured.message || '知识库导入失败', structured.details || '', 400);
+      throw createAppError(
+        structured.code || 'MCP_TOOL_ERROR',
+        structured.message || '知识库导入失败',
+        structured.details || '',
+        structured.status || 400
+      );
     }
 
     res.json({
@@ -301,7 +325,12 @@ app.delete('/api/knowledge/:id', async (req, res) => {
 
     const structured = normalizeStructuredContent(result);
     if (result.isError) {
-      throw createAppError(structured.code || 'MCP_TOOL_ERROR', structured.message || '删除失败', structured.details || '', 400);
+      throw createAppError(
+        structured.code || 'MCP_TOOL_ERROR',
+        structured.message || '删除失败',
+        structured.details || '',
+        structured.status || 400
+      );
     }
 
     res.json({ ok: true });
@@ -325,7 +354,12 @@ app.delete('/api/knowledge', async (_, res) => {
 
     const structured = normalizeStructuredContent(result);
     if (result.isError) {
-      throw createAppError(structured.code || 'MCP_TOOL_ERROR', structured.message || '清空失败', structured.details || '', 400);
+      throw createAppError(
+        structured.code || 'MCP_TOOL_ERROR',
+        structured.message || '清空失败',
+        structured.details || '',
+        structured.status || 400
+      );
     }
 
     res.json({ ok: true });
@@ -343,6 +377,12 @@ app.post('/api/chat/stream', async (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
   res.setHeader('Cache-Control', 'no-cache, no-transform');
   res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.flushHeaders();
+
+  const controller = new AbortController();
+  const abortOnClose = () => controller.abort();
+  res.on('close', abortOnClose);
 
   try {
     const session = await createMcpSession();
@@ -361,121 +401,22 @@ app.post('/api/chat/stream', async (req, res) => {
       ...incomingMessages
     ];
 
-    const gatheredCitations = [];
-    const gatheredTools = [];
     const toolDefinitions = buildToolDefinitions(availableTools.tools || []);
-
-    for (let round = 0; round < 4; round += 1) {
-      const completion = await qwenFetch('/chat/completions', {
+    await runStreamingChat({
+      messages,
+      tools: toolDefinitions,
+      signal: controller.signal,
+      requestCompletion: (body) => qwenFetch('/chat/completions', {
         model: config.model,
-        stream: false,
         temperature: 0.4,
-        messages,
-        tools: toolDefinitions,
-        tool_choice: 'auto'
-      });
-
-      const choice = completion.choices?.[0]?.message;
-      const toolCalls = choice?.tool_calls || [];
-
-      if (!toolCalls.length) {
-        if (choice) {
-          messages.push(choice);
-        }
-        break;
-      }
-
-      messages.push({
-        role: 'assistant',
-        content: choice.content || '',
-        tool_calls: toolCalls
-      });
-
-      for (const toolCall of toolCalls) {
-        const previewArgs = toolCall.function?.arguments ? JSON.parse(toolCall.function.arguments) : {};
-        sendSse(res, 'tool', {
-          id: toolCall.id,
-          name: toolCall.function?.name,
-          args: previewArgs,
-          status: 'running'
-        });
-
-        const executed = await executeToolCallWithMcp(session.client, toolCall);
-
-        gatheredCitations.push(...executed.citations);
-        gatheredTools.push({
-          id: toolCall.id,
-          name: toolCall.function?.name,
-          args: executed.args,
-          status: executed.isError ? 'error' : 'success',
-          result: executed.resultText
-        });
-
-        sendSse(res, 'tool', {
-          id: toolCall.id,
-          name: toolCall.function?.name,
-          args: executed.args,
-          status: executed.isError ? 'error' : 'success',
-          result: executed.resultPayload
-        });
-
-        if (executed.citations.length) {
-          sendSse(res, 'citations', { citations: executed.citations });
-        }
-
-        messages.push({
-          role: 'tool',
-          tool_call_id: toolCall.id,
-          content: JSON.stringify(executed.resultPayload)
-        });
-      }
-    }
-
-    const streamResponse = await qwenFetch('/chat/completions', {
-      model: config.model,
-      stream: true,
-      temperature: 0.4,
-      messages
-    }, true);
-
-    const reader = streamResponse.body.getReader();
-    const decoder = new TextDecoder('utf-8');
-    let buffer = '';
-
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      const events = buffer.split('\n\n');
-      buffer = events.pop() ?? '';
-
-      for (const event of events) {
-        const lines = event.split('\n').map((line) => line.trim()).filter(Boolean);
-        for (const line of lines) {
-          if (!line.startsWith('data:')) continue;
-          const raw = line.slice(5).trim();
-          if (raw === '[DONE]') {
-            sendSse(res, 'done', { citations: gatheredCitations, tools: gatheredTools });
-            res.end();
-            return;
-          }
-
-          try {
-            const json = JSON.parse(raw);
-            const token = json.choices?.[0]?.delta?.content;
-            if (token) {
-              sendSse(res, 'token', { token });
-            }
-          } catch {
-            // ignore invalid chunks
-          }
-        }
-      }
-    }
-
-    sendSse(res, 'done', { citations: gatheredCitations, tools: gatheredTools });
+        ...body
+      }, true, controller.signal),
+      executeTool: (call) => executeToolCallWithMcp(session.client, call, controller.signal),
+      onEvent: (event, data) => sendSse(res, event, data)
+    });
     res.end();
   } catch (error) {
+    if (controller.signal.aborted || res.destroyed) return;
     const payload = getErrorPayload(error, '服务异常');
     sendSse(res, 'error', {
       code: payload.code,
@@ -483,6 +424,8 @@ app.post('/api/chat/stream', async (req, res) => {
       details: payload.details
     });
     res.end();
+  } finally {
+    res.off('close', abortOnClose);
   }
 });
 

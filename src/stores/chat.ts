@@ -483,6 +483,7 @@ export const useChatStore = defineStore('chat', () => {
           ...toConversationMessages(activeSession.value.messages.slice(0, -1))
         ],
         (event) => {
+          if (controller.signal.aborted) return;
           if (event.type === 'token' && event.token) {
             // 每个Token仍然立即更新内存，
             // 因此页面上的文字依然逐步显示
@@ -545,9 +546,8 @@ export const useChatStore = defineStore('chat', () => {
     } finally {
       if (abortController.value === controller) {
         abortController.value = null;
+        isResponding.value = false;
       }
-
-      isResponding.value = false;
 
       /**
        * finally不再修改会话时间并强制重复保存，

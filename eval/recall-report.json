@@ -1,0 +1,3095 @@
+{
+  "generatedAt": "2026-09-23T13:58:34.795Z",
+  "dataset": "eval/rag-recall-cases.json",
+  "collection": "yuan_agent_knowledge",
+  "embeddingModel": "text-embedding-v3",
+  "chunkCount": 32,
+  "candidateLimit": 20,
+  "vectorScoreThreshold": 0.15,
+  "evaluationRule": "每题 Top K 中至少出现一个人工标注的相关切片即记为命中",
+  "methods": {
+    "vectorOnly": {
+      "name": "纯向量检索基线",
+      "k": 3,
+      "hits": 25,
+      "total": 32,
+      "recallAtK": 0.78125,
+      "recallAtKPercent": 78.13
+    },
+    "hybrid": {
+      "name": "向量 + BM25 + RRF",
+      "k": 3,
+      "hits": 30,
+      "total": 32,
+      "recallAtK": 0.9375,
+      "recallAtKPercent": 93.75
+    }
+  },
+  "improvement": {
+    "additionalHits": 5,
+    "absolutePercentagePoints": 15.62,
+    "relativePercent": 20
+  },
+  "cases": [
+    {
+      "id": "gf-001",
+      "question": "哪些学生可以申请广府人助学金，第二学位学生能申请吗？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "goldChunkIds": [
+        "chunk-2d6fbcc1-0432-46e2-ab61-e7cdb611e0e0"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.77419293,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7678693,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7594198,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.77419293,
+            "bm25Score": 14.3321989268747,
+            "rrfScore": 0.03252247488101534,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-2d6fbcc1-0432-46e2-ab61-e7cdb611e0e0",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.72007054,
+            "bm25Score": 17.17480394406639,
+            "rrfScore": 0.032018442622950824,
+            "relevant": true,
+            "snippet": "华南师范大学“广府人助学金”评奖通知\n\n为了助力家庭经济困难学生减轻学业负担，鼓励学生潜心向学、全面发展，为了支持和推动华南师范大学教育事业不断发展，为社会培养更多的优秀人才，广东省广府人珠玑巷后裔海外联谊会向广东省华南师范大学教育发展基金会捐赠10万元，设立“广府人助学金”。为做好华南师范大学 “广府人助学金”的评选工作，现有关评奖通知如下：\n\n1. 资助"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7678693,
+            "bm25Score": 13.617154380085536,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gf-002",
+      "question": "广府人助学金分哪几类，每类有多少名额、每人多少钱？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "goldChunkIds": [
+        "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.78989029,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.75437081,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.73105156,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.78989029,
+            "bm25Score": 16.083809559927648,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.75437081,
+            "bm25Score": 11.926630012057982,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-2d6fbcc1-0432-46e2-ab61-e7cdb611e0e0",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.70623702,
+            "bm25Score": 12.44098422581563,
+            "rrfScore": 0.031754032258064516,
+            "relevant": false,
+            "snippet": "华南师范大学“广府人助学金”评奖通知\n\n为了助力家庭经济困难学生减轻学业负担，鼓励学生潜心向学、全面发展，为了支持和推动华南师范大学教育事业不断发展，为社会培养更多的优秀人才，广东省广府人珠玑巷后裔海外联谊会向广东省华南师范大学教育发展基金会捐赠10万元，设立“广府人助学金”。为做好华南师范大学 “广府人助学金”的评选工作，现有关评奖通知如下：\n\n1. 资助"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gf-003",
+      "question": "本科生申请广府人助学金青云奖，对绩点和重修有什么要求？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "goldChunkIds": [
+        "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.8101630200000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7892037000000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.72994107,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.8101630200000001,
+            "bm25Score": 28.92589788602055,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7892037000000001,
+            "bm25Score": 23.140776784970395,
+            "rrfScore": 0.03225806451612903,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-0f54c9e9-c360-4a16-8492-bb5bde90cd1c",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.6619501,
+            "bm25Score": 16.261382906265037,
+            "rrfScore": 0.03149801587301587,
+            "relevant": false,
+            "snippet": "各学院将公示结果及评选材料报送党委学生工作部（党委研究生工作部）。6月18日17：00前各学院将公示无异议的相关纸质版报南海校园“一站式”学生社区113服务大厅10号桌，电子版材料发至邮箱qgxxdyb@163\\.com：\n\n1. 《华南师范大学佛山校区2025年“广府人助学金”初审名单汇总表》（提交可编辑的Excel版和签字盖章后的扫描件PDF版）；\n\n名"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gf-004",
+      "question": "已经获得其他资助的家庭经济困难本科生，还能申请青云奖吗？有哪些例外？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "goldChunkIds": [
+        "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7004279,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.68809056,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.65274638,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7004279,
+            "bm25Score": 23.05719429925403,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.68809056,
+            "bm25Score": 19.795585269897057,
+            "rrfScore": 0.03225806451612903,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.65274638,
+            "bm25Score": 4.958893578983313,
+            "rrfScore": 0.031024531024531024,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gf-005",
+      "question": "本科生申请广府人助学金创新奖，需要达到什么绩点和获奖条件？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "goldChunkIds": [
+        "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.80533051,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.79682988,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7906524500000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.80533051,
+            "bm25Score": 24.447907727897604,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.79682988,
+            "bm25Score": 18.251569591085744,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-0f54c9e9-c360-4a16-8492-bb5bde90cd1c",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.72269523,
+            "bm25Score": 18.707826674462204,
+            "rrfScore": 0.031754032258064516,
+            "relevant": false,
+            "snippet": "各学院将公示结果及评选材料报送党委学生工作部（党委研究生工作部）。6月18日17：00前各学院将公示无异议的相关纸质版报南海校园“一站式”学生社区113服务大厅10号桌，电子版材料发至邮箱qgxxdyb@163\\.com：\n\n1. 《华南师范大学佛山校区2025年“广府人助学金”初审名单汇总表》（提交可编辑的Excel版和签字盖章后的扫描件PDF版）；\n\n名"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gf-006",
+      "question": "广府人助学金的学业奖要求成绩排名达到什么水平？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "goldChunkIds": [
+        "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.79188025,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.76973957,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.76655257,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.79188025,
+            "bm25Score": 15.747660212822957,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.76973957,
+            "bm25Score": 13.101482465518899,
+            "rrfScore": 0.0315136476426799,
+            "relevant": false,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-0f54c9e9-c360-4a16-8492-bb5bde90cd1c",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.70154345,
+            "bm25Score": 14.59867928744695,
+            "rrfScore": 0.0315136476426799,
+            "relevant": false,
+            "snippet": "各学院将公示结果及评选材料报送党委学生工作部（党委研究生工作部）。6月18日17：00前各学院将公示无异议的相关纸质版报南海校园“一站式”学生社区113服务大厅10号桌，电子版材料发至邮箱qgxxdyb@163\\.com：\n\n1. 《华南师范大学佛山校区2025年“广府人助学金”初审名单汇总表》（提交可编辑的Excel版和签字盖章后的扫描件PDF版）；\n\n名"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gf-007",
+      "question": "广府人助学金由学生本人申请的截止日期是什么时候？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "goldChunkIds": [
+        "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 3,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.79956174,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.75435883,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7502833,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 3,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.79956174,
+            "bm25Score": 12.37172060559304,
+            "rrfScore": 0.032018442622950824,
+            "relevant": false,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-0f54c9e9-c360-4a16-8492-bb5bde90cd1c",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.74946082,
+            "bm25Score": 13.337776529618218,
+            "rrfScore": 0.032018442622950824,
+            "relevant": false,
+            "snippet": "各学院将公示结果及评选材料报送党委学生工作部（党委研究生工作部）。6月18日17：00前各学院将公示无异议的相关纸质版报南海校园“一站式”学生社区113服务大厅10号桌，电子版材料发至邮箱qgxxdyb@163\\.com：\n\n1. 《华南师范大学佛山校区2025年“广府人助学金”初审名单汇总表》（提交可编辑的Excel版和签字盖章后的扫描件PDF版）；\n\n名"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7502833,
+            "bm25Score": 12.99183463579891,
+            "rrfScore": 0.03200204813108039,
+            "relevant": true,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gf-008",
+      "question": "获得广府人助学金后如果学位论文答辩没通过，奖项和资助怎么处理？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "goldChunkIds": [
+        "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7988466,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-0f54c9e9-c360-4a16-8492-bb5bde90cd1c",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7157975999999999,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "各学院将公示结果及评选材料报送党委学生工作部（党委研究生工作部）。6月18日17：00前各学院将公示无异议的相关纸质版报南海校园“一站式”学生社区113服务大厅10号桌，电子版材料发至邮箱qgxxdyb@163\\.com：\n\n1. 《华南师范大学佛山校区2025年“广府人助学金”初审名单汇总表》（提交可编辑的Excel版和签字盖章后的扫描件PDF版）；\n\n名"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.71482497,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-faaeb994-8753-4af1-abc6-aa46b21ce8fe",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.7988466,
+            "bm25Score": 20.50173368173243,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "“广府人助学金”评审小组对各学院推荐的预备候选学生进行评审，确定正式候选人。学生工作处在全校范围内公示3个工作日。\n\n1. 奖励方式\n\n学校颁发荣誉证书和“广府人助学金”。\n\n1. 有关要求\n2. 请各单位高度重视，严格把关，坚持公开、公平、公正原 则，认真组织好评选推荐工作。\n3. 获得本次“广府人助学金”者，如出现学位论文答辩未通过、不能按期正常毕业或离"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-bf6ebba2-a215-41fb-9682-e0f07f69c156",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.6892493399999999,
+            "bm25Score": 18.026217014472977,
+            "rrfScore": 0.031754032258064516,
+            "relevant": false,
+            "snippet": "1. 申请条件\n2. <a id=\"_Hlk211457143\"></a>所有申请者必须同时具备的基本标准：\n3. 热爱社会主义祖国，拥护中国共产党的领导，诚实守信，道德品质优良。\n4. 遵纪守法，遵守学校规章制度，无违纪记录，未受过任何通报批评或纪律处分。\n5. 积极参加文体活动，坚持体育锻炼，体能测试达标。\n6. 积极承担社会工作，热心公益活动，乐于为同"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.71482497,
+            "bm25Score": 17.370376018665695,
+            "rrfScore": 0.031746031746031744,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-001",
+      "question": "研究生国家奖学金对学术学位和专业学位研究生分别侧重考察什么？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [
+        2
+      ],
+      "goldChunkIds": [
+        "chunk-3b5c64ee-9fa7-4d6f-a534-b145c05bb67f"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.76808578,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7522918000000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7363605,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.71289492,
+            "bm25Score": 8.103830801722886,
+            "rrfScore": 0.0315136476426799,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7363605,
+            "bm25Score": 4.346971932091382,
+            "rrfScore": 0.03149801587301587,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.76808578,
+            "bm25Score": 4.138183075348152,
+            "rrfScore": 0.03131881575727918,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-002",
+      "question": "国家奖学金评审时，成果认定的时间范围是怎么规定的？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [
+        2
+      ],
+      "goldChunkIds": [
+        "chunk-3b5c64ee-9fa7-4d6f-a534-b145c05bb67f"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-73ed719e-c72f-4805-800a-f4975d112a27",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 6,
+            "pageEnd": 6,
+            "vectorScore": 0.74857664,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t6 \t—\n（三）\t唯一第一作者的科研成果优先考虑。\n七、评审程序\n（一）\t启动与准备\n完成研究生国家奖学金评选实施办法的修订、院级评审工作\n小组遴选，下达评审通知。\n（二）\t个人申请\n符合申报条件的研究生，向学院提出申请，如实填写《研究\n生国家奖学金申请审批表》，同时需提供相关证明材料（图书馆\n论文检索证明（需包含检索到的论文数、收录数据库、论文题\n目"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-42cfab22-0cee-4d81-9664-61587e6ef602",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.74685585,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t7 \t—\n示期间，学生可以书面形式实名向学院提出申诉，学院应在 \t3\n个工作日内予以答复。公示无异议后上报党委研究生工作部汇\n总、审核。\n（四）\t学校评定\n学校研究生评审委员会评审并提出研究生国家奖学金建议名\n单，在全校范围内进行不少于 \t5 \t个工作日的公示，在公示期间，\n学生可以书面形式实名向党委研究生工作部提出申诉，党委研究\n生工作部应在 \t3 "
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7436156300000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-73ed719e-c72f-4805-800a-f4975d112a27",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 6,
+            "pageEnd": 6,
+            "vectorScore": 0.74857664,
+            "bm25Score": 6.35676808517305,
+            "rrfScore": 0.032018442622950824,
+            "relevant": false,
+            "snippet": "— \t6 \t—\n（三）\t唯一第一作者的科研成果优先考虑。\n七、评审程序\n（一）\t启动与准备\n完成研究生国家奖学金评选实施办法的修订、院级评审工作\n小组遴选，下达评审通知。\n（二）\t个人申请\n符合申报条件的研究生，向学院提出申请，如实填写《研究\n生国家奖学金申请审批表》，同时需提供相关证明材料（图书馆\n论文检索证明（需包含检索到的论文数、收录数据库、论文题\n目"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-3b5c64ee-9fa7-4d6f-a534-b145c05bb67f",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 1,
+            "pageEnd": 2,
+            "vectorScore": 0.70241892,
+            "bm25Score": 7.254561081208303,
+            "rrfScore": 0.031544957774465976,
+            "relevant": true,
+            "snippet": "— \t1 \t—\n华南师范大学人工智能学院文件\n华师智院〔2025〕9 \t号\n关于印发《华南师范大学人工智能学院研究生国\n家奖学金评选实施办法（试行）》的通知\n学院各单位：\n经学院重组工作小组会议审定，现将《华南师范大学人工智\n能学院研究生国家奖学金评选实施办法（试行）》印发给你们，\n请遵照执行。\n华南师范大学人工智能学院\n2025 \t年 \t9 \t月 \t5 \t"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7436156300000001,
+            "bm25Score": 5.117596026821868,
+            "rrfScore": 0.031024531024531024,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-003",
+      "question": "申请研究生国家奖学金后，还能同时申请其他研究生奖助项目吗？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [
+        2
+      ],
+      "goldChunkIds": [
+        "chunk-3b5c64ee-9fa7-4d6f-a534-b145c05bb67f"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.78205222,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-73ed719e-c72f-4805-800a-f4975d112a27",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 6,
+            "pageEnd": 6,
+            "vectorScore": 0.72198647,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t6 \t—\n（三）\t唯一第一作者的科研成果优先考虑。\n七、评审程序\n（一）\t启动与准备\n完成研究生国家奖学金评选实施办法的修订、院级评审工作\n小组遴选，下达评审通知。\n（二）\t个人申请\n符合申报条件的研究生，向学院提出申请，如实填写《研究\n生国家奖学金申请审批表》，同时需提供相关证明材料（图书馆\n论文检索证明（需包含检索到的论文数、收录数据库、论文题\n目"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.71668977,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 3,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-73ed719e-c72f-4805-800a-f4975d112a27",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 6,
+            "pageEnd": 6,
+            "vectorScore": 0.72198647,
+            "bm25Score": 7.2841049445682735,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t6 \t—\n（三）\t唯一第一作者的科研成果优先考虑。\n七、评审程序\n（一）\t启动与准备\n完成研究生国家奖学金评选实施办法的修订、院级评审工作\n小组遴选，下达评审通知。\n（二）\t个人申请\n符合申报条件的研究生，向学院提出申请，如实填写《研究\n生国家奖学金申请审批表》，同时需提供相关证明材料（图书馆\n论文检索证明（需包含检索到的论文数、收录数据库、论文题\n目"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.78205222,
+            "bm25Score": 5.36434442868765,
+            "rrfScore": 0.03131881575727918,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-3b5c64ee-9fa7-4d6f-a534-b145c05bb67f",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 1,
+            "pageEnd": 2,
+            "vectorScore": 0.666968,
+            "bm25Score": 11.143998224327351,
+            "rrfScore": 0.030621785881252923,
+            "relevant": true,
+            "snippet": "— \t1 \t—\n华南师范大学人工智能学院文件\n华师智院〔2025〕9 \t号\n关于印发《华南师范大学人工智能学院研究生国\n家奖学金评选实施办法（试行）》的通知\n学院各单位：\n经学院重组工作小组会议审定，现将《华南师范大学人工智\n能学院研究生国家奖学金评选实施办法（试行）》印发给你们，\n请遵照执行。\n华南师范大学人工智能学院\n2025 \t年 \t9 \t月 \t5 \t"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-004",
+      "question": "博士和硕士研究生国家奖学金每人每年分别奖励多少钱？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [
+        3
+      ],
+      "goldChunkIds": [
+        "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7776153100000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.75090438,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.70921862,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7776153100000001,
+            "bm25Score": 9.194319860789655,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.75090438,
+            "bm25Score": 7.247121643489502,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.70921862,
+            "bm25Score": 8.707777258648113,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-005",
+      "question": "硕博连读学生从哪一年开始按博士研究生身份申请国家奖学金？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [
+        3
+      ],
+      "goldChunkIds": [
+        "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7858076700000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.70131385,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-73ed719e-c72f-4805-800a-f4975d112a27",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 6,
+            "pageEnd": 6,
+            "vectorScore": 0.68042696,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t6 \t—\n（三）\t唯一第一作者的科研成果优先考虑。\n七、评审程序\n（一）\t启动与准备\n完成研究生国家奖学金评选实施办法的修订、院级评审工作\n小组遴选，下达评审通知。\n（二）\t个人申请\n符合申报条件的研究生，向学院提出申请，如实填写《研究\n生国家奖学金申请审批表》，同时需提供相关证明材料（图书馆\n论文检索证明（需包含检索到的论文数、收录数据库、论文题\n目"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7858076700000001,
+            "bm25Score": 24.83300061553113,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.70131385,
+            "bm25Score": 22.727607889088564,
+            "rrfScore": 0.03225806451612903,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.66400832,
+            "bm25Score": 5.768217305332027,
+            "rrfScore": 0.031009615384615385,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-006",
+      "question": "哪些情况会让研究生失去当年国家奖学金参评资格？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [
+        4
+      ],
+      "goldChunkIds": [
+        "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7930417,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-d19f7ff6-f0ad-42fa-a4f7-13a6571e04dd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 17,
+            "pageEnd": 18,
+            "vectorScore": 0.7890693,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t17 \t—\n（二）\t研究生在学制期限内，由于出国（境）、疾病等原因\n办理保留学籍或休学等手续的，暂停对其发放学业奖学金，待恢\n复学籍后再行发放。提前毕业的研究生，毕业后停发学业奖学\n金；退学的研究生须退回已领取的部分学业奖学金，具体退费原\n则按学期计算，一学年在校学习不足一学期者，退回一半奖学\n金；一学年在校学习超过一学期者，则无须退回奖学金；超过规\n"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-cfc490fb-15ef-44c5-8fe2-d5de229cf925",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 8,
+            "pageEnd": 8,
+            "vectorScore": 0.78377187,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t8 \t—\n究生国家奖学金；超过规定学制的研究生不再发放国家奖学金。\n九、附则\n（一）\t根据学院的实际情况制定相应的研究生国家奖学金评\n选实施办法，报研究生工作部（处）备案。\n（二）\t对于在国家奖学金评奖中违反诚信原则、弄虚作假、\n为自己或者他人谋取不正当利益的个人，取消其评奖资格，并视\n情节给予批评教育或者纪律处分。\n（三）\t本办法自通过之日起施行。\n"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7930417,
+            "bm25Score": 9.103127879793544,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-cfc490fb-15ef-44c5-8fe2-d5de229cf925",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 8,
+            "pageEnd": 8,
+            "vectorScore": 0.78377187,
+            "bm25Score": 6.02637967629952,
+            "rrfScore": 0.03149801587301587,
+            "relevant": false,
+            "snippet": "— \t8 \t—\n究生国家奖学金；超过规定学制的研究生不再发放国家奖学金。\n九、附则\n（一）\t根据学院的实际情况制定相应的研究生国家奖学金评\n选实施办法，报研究生工作部（处）备案。\n（二）\t对于在国家奖学金评奖中违反诚信原则、弄虚作假、\n为自己或者他人谋取不正当利益的个人，取消其评奖资格，并视\n情节给予批评教育或者纪律处分。\n（三）\t本办法自通过之日起施行。\n"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7427760999999999,
+            "bm25Score": 6.18725885881734,
+            "rrfScore": 0.031024531024531024,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-007",
+      "question": "用论文申请国家奖学金时，对作者顺序和第一署名单位有什么要求？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [
+        4,
+        5
+      ],
+      "goldChunkIds": [
+        "chunk-918e375a-25b0-40b6-a53b-bdbf0ba2ef73"
+      ],
+      "goldKeywordCoverage": 0.6667,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-73ed719e-c72f-4805-800a-f4975d112a27",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 6,
+            "pageEnd": 6,
+            "vectorScore": 0.7757149999999999,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t6 \t—\n（三）\t唯一第一作者的科研成果优先考虑。\n七、评审程序\n（一）\t启动与准备\n完成研究生国家奖学金评选实施办法的修订、院级评审工作\n小组遴选，下达评审通知。\n（二）\t个人申请\n符合申报条件的研究生，向学院提出申请，如实填写《研究\n生国家奖学金申请审批表》，同时需提供相关证明材料（图书馆\n论文检索证明（需包含检索到的论文数、收录数据库、论文题\n目"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-918e375a-25b0-40b6-a53b-bdbf0ba2ef73",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.7492845,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t5 \t—\n号），会议论文必须是正式发表的论文（CCF \tA \t类和 \tB \t类会议\n论文可放宽至正式录用，需提供录用通知、参会注册等有效证明\n材料）；\n3.论文作者第一单位必须为华南师范大学人工智能学院；\n4.论文级别根据《人工智能学院学术论文评价办法（试\n行）》进行界定。\n（三）\t主持校级或校级以上科研课题。\n（四）\t在专业领域内的各项比赛竞赛中取得"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.73005277,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-73ed719e-c72f-4805-800a-f4975d112a27",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 6,
+            "pageEnd": 6,
+            "vectorScore": 0.7757149999999999,
+            "bm25Score": 12.635360980481906,
+            "rrfScore": 0.03278688524590164,
+            "relevant": false,
+            "snippet": "— \t6 \t—\n（三）\t唯一第一作者的科研成果优先考虑。\n七、评审程序\n（一）\t启动与准备\n完成研究生国家奖学金评选实施办法的修订、院级评审工作\n小组遴选，下达评审通知。\n（二）\t个人申请\n符合申报条件的研究生，向学院提出申请，如实填写《研究\n生国家奖学金申请审批表》，同时需提供相关证明材料（图书馆\n论文检索证明（需包含检索到的论文数、收录数据库、论文题\n目"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-918e375a-25b0-40b6-a53b-bdbf0ba2ef73",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.7492845,
+            "bm25Score": 9.799535663545047,
+            "rrfScore": 0.031754032258064516,
+            "relevant": true,
+            "snippet": "— \t5 \t—\n号），会议论文必须是正式发表的论文（CCF \tA \t类和 \tB \t类会议\n论文可放宽至正式录用，需提供录用通知、参会注册等有效证明\n材料）；\n3.论文作者第一单位必须为华南师范大学人工智能学院；\n4.论文级别根据《人工智能学院学术论文评价办法（试\n行）》进行界定。\n（三）\t主持校级或校级以上科研课题。\n（四）\t在专业领域内的各项比赛竞赛中取得"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.73005277,
+            "bm25Score": 9.926471893384576,
+            "rrfScore": 0.031746031746031744,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-008",
+      "question": "研究生国家奖学金获奖名单在学校层面要公示多久，奖学金最迟何时发放？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [
+        7
+      ],
+      "goldChunkIds": [
+        "chunk-42cfab22-0cee-4d81-9664-61587e6ef602"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-42cfab22-0cee-4d81-9664-61587e6ef602",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.8479476,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t7 \t—\n示期间，学生可以书面形式实名向学院提出申诉，学院应在 \t3\n个工作日内予以答复。公示无异议后上报党委研究生工作部汇\n总、审核。\n（四）\t学校评定\n学校研究生评审委员会评审并提出研究生国家奖学金建议名\n单，在全校范围内进行不少于 \t5 \t个工作日的公示，在公示期间，\n学生可以书面形式实名向党委研究生工作部提出申诉，党委研究\n生工作部应在 \t3 "
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.76233661,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-673a6bb9-6a3b-4729-94b5-8bad3c1a6c9d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 16,
+            "pageEnd": 16,
+            "vectorScore": 0.7534706,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t16 \t—\n3.评审过程中充分尊重本单位学术组织、研究生导师的推荐\n意见。学院评审工作小组成员在履行评审工作职责时应遵循平等\n原则、回避原则、公正原则和保密原则。\n4.评审过程中，除评委会要求外，不允许学生再提交材料，\n不对新增材料进行加分。申请人因提交材料不齐导致评审加分结\n果差异的，由申请人负责。\n（四）\t学校评审\n党委研究生工作部提出研究生学业奖"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-42cfab22-0cee-4d81-9664-61587e6ef602",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.8479476,
+            "bm25Score": 11.550777771542926,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t7 \t—\n示期间，学生可以书面形式实名向学院提出申诉，学院应在 \t3\n个工作日内予以答复。公示无异议后上报党委研究生工作部汇\n总、审核。\n（四）\t学校评定\n学校研究生评审委员会评审并提出研究生国家奖学金建议名\n单，在全校范围内进行不少于 \t5 \t个工作日的公示，在公示期间，\n学生可以书面形式实名向党委研究生工作部提出申诉，党委研究\n生工作部应在 \t3 "
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-673a6bb9-6a3b-4729-94b5-8bad3c1a6c9d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 16,
+            "pageEnd": 16,
+            "vectorScore": 0.7534706,
+            "bm25Score": 10.254900843763899,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t16 \t—\n3.评审过程中充分尊重本单位学术组织、研究生导师的推荐\n意见。学院评审工作小组成员在履行评审工作职责时应遵循平等\n原则、回避原则、公正原则和保密原则。\n4.评审过程中，除评委会要求外，不允许学生再提交材料，\n不对新增材料进行加分。申请人因提交材料不齐导致评审加分结\n果差异的，由申请人负责。\n（四）\t学校评审\n党委研究生工作部提出研究生学业奖"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-d331eb18-8592-4844-b5dc-6c383079ec73",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 15,
+            "pageEnd": 15,
+            "vectorScore": 0.74048197,
+            "bm25Score": 5.278607670592809,
+            "rrfScore": 0.030536130536130537,
+            "relevant": false,
+            "snippet": "— \t15 \t—\n六、评审程序\n（一）\t启动与准备\n完成研究生学业奖学金评选实施办法的修订、院级评审工作\n小组、年级评优工作小组遴选，明确等级名额指标分配，下达评\n审通知。\n（二）\t个人申请\n符合申报条件的研究生，在基本学制年限内向学院提出申\n请，直博生和不授予中间学位的硕博连读学生，根据当年所修课\n程的层次阶段确定身份参与学业奖学金的评定。在选修硕士课程\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "xy-001",
+      "question": "研究生学业奖学金认定成果的起止时间是什么？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [
+        2
+      ],
+      "goldChunkIds": [
+        "chunk-bf48cdcf-b5bd-4123-9fb0-ac114b2d7420"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-d331eb18-8592-4844-b5dc-6c383079ec73",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 15,
+            "pageEnd": 15,
+            "vectorScore": 0.79813874,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t15 \t—\n六、评审程序\n（一）\t启动与准备\n完成研究生学业奖学金评选实施办法的修订、院级评审工作\n小组、年级评优工作小组遴选，明确等级名额指标分配，下达评\n审通知。\n（二）\t个人申请\n符合申报条件的研究生，在基本学制年限内向学院提出申\n请，直博生和不授予中间学位的硕博连读学生，根据当年所修课\n程的层次阶段确定身份参与学业奖学金的评定。在选修硕士课程\n"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-42cfab22-0cee-4d81-9664-61587e6ef602",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.78610736,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t7 \t—\n示期间，学生可以书面形式实名向学院提出申诉，学院应在 \t3\n个工作日内予以答复。公示无异议后上报党委研究生工作部汇\n总、审核。\n（四）\t学校评定\n学校研究生评审委员会评审并提出研究生国家奖学金建议名\n单，在全校范围内进行不少于 \t5 \t个工作日的公示，在公示期间，\n学生可以书面形式实名向党委研究生工作部提出申诉，党委研究\n生工作部应在 \t3 "
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-d19f7ff6-f0ad-42fa-a4f7-13a6571e04dd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 17,
+            "pageEnd": 18,
+            "vectorScore": 0.78332764,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t17 \t—\n（二）\t研究生在学制期限内，由于出国（境）、疾病等原因\n办理保留学籍或休学等手续的，暂停对其发放学业奖学金，待恢\n复学籍后再行发放。提前毕业的研究生，毕业后停发学业奖学\n金；退学的研究生须退回已领取的部分学业奖学金，具体退费原\n则按学期计算，一学年在校学习不足一学期者，退回一半奖学\n金；一学年在校学习超过一学期者，则无须退回奖学金；超过规\n"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-d19f7ff6-f0ad-42fa-a4f7-13a6571e04dd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 17,
+            "pageEnd": 18,
+            "vectorScore": 0.78332764,
+            "bm25Score": 5.743960593792171,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t17 \t—\n（二）\t研究生在学制期限内，由于出国（境）、疾病等原因\n办理保留学籍或休学等手续的，暂停对其发放学业奖学金，待恢\n复学籍后再行发放。提前毕业的研究生，毕业后停发学业奖学\n金；退学的研究生须退回已领取的部分学业奖学金，具体退费原\n则按学期计算，一学年在校学习不足一学期者，退回一半奖学\n金；一学年在校学习超过一学期者，则无须退回奖学金；超过规\n"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.77582389,
+            "bm25Score": 4.066442196449703,
+            "rrfScore": 0.030776515151515152,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.76910675,
+            "bm25Score": 4.977027175699831,
+            "rrfScore": 0.030776515151515152,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          }
+        ]
+      }
+    },
+    {
+      "id": "xy-002",
+      "question": "硕士研究生学业奖学金一、二、三等奖分别多少钱，占比分别是多少？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [
+        3
+      ],
+      "goldChunkIds": [
+        "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.78522718,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.78191078,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.73488003,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.78522718,
+            "bm25Score": 9.76103095663982,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.78191078,
+            "bm25Score": 9.050952697073487,
+            "rrfScore": 0.03225806451612903,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.73488003,
+            "bm25Score": 7.233208465883195,
+            "rrfScore": 0.03149801587301587,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          }
+        ]
+      }
+    },
+    {
+      "id": "xy-003",
+      "question": "博士研究生学业奖学金三个等级的金额和比例分别是什么？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [
+        3
+      ],
+      "goldChunkIds": [
+        "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.82071537,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.79616708,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-5605a0e5-edd8-453e-9d90-bf62c7ac4837",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.75101107,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n金，但获奖成果不可重复申报使用。直博生和不授予中间学位的\n硕博连读学生，根据评选当年秋季学期所修课程的层次阶段确定\n身份参与研究生国家奖学金的评定。在选修硕士课程阶段按照硕\n士研究生身份参与评定；进入选修博士研究生课程阶段按照博士\n研究生身份参与评定。硕博连读的博士一年级研究生以博士研究\n生身份参评，可适当兼顾其在硕士阶段取得的突出成绩，其支"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.82071537,
+            "bm25Score": 11.64615749007083,
+            "rrfScore": 0.03278688524590164,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.79616708,
+            "bm25Score": 9.717428946599396,
+            "rrfScore": 0.03200204813108039,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-d331eb18-8592-4844-b5dc-6c383079ec73",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 15,
+            "pageEnd": 15,
+            "vectorScore": 0.7041303999999999,
+            "bm25Score": 9.717514212622843,
+            "rrfScore": 0.0315136476426799,
+            "relevant": false,
+            "snippet": "— \t15 \t—\n六、评审程序\n（一）\t启动与准备\n完成研究生学业奖学金评选实施办法的修订、院级评审工作\n小组、年级评优工作小组遴选，明确等级名额指标分配，下达评\n审通知。\n（二）\t个人申请\n符合申报条件的研究生，在基本学制年限内向学院提出申\n请，直博生和不授予中间学位的硕博连读学生，根据当年所修课\n程的层次阶段确定身份参与学业奖学金的评定。在选修硕士课程\n"
+          }
+        ]
+      }
+    },
+    {
+      "id": "xy-004",
+      "question": "硕士一年级新生获得学业奖学金一等奖的比例上限是多少，哪些人优先？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [
+        4
+      ],
+      "goldChunkIds": [
+        "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.83032697,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7811850300000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.76493907,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.83032697,
+            "bm25Score": 22.21142851389911,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.76493907,
+            "bm25Score": 14.395163540350467,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7811850300000001,
+            "bm25Score": 8.488900490713934,
+            "rrfScore": 0.031754032258064516,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          }
+        ]
+      }
+    },
+    {
+      "id": "xy-005",
+      "question": "二年级及以上硕士生评学业奖学金时，思想品德、课业、科研实践和社会服务各占多少？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [
+        5
+      ],
+      "goldChunkIds": [
+        "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.77630389,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7694543,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.76406527,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.77630389,
+            "bm25Score": 17.588042791141532,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.76406527,
+            "bm25Score": 11.101579867963759,
+            "rrfScore": 0.031746031746031744,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7235211699999999,
+            "bm25Score": 13.713487780755289,
+            "rrfScore": 0.03128054740957967,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          }
+        ]
+      }
+    },
+    {
+      "id": "xy-006",
+      "question": "研究生学业奖学金的课业平均成绩怎么计算，专业型硕士的工程实践课算不算？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [
+        7,
+        8
+      ],
+      "goldChunkIds": [
+        "chunk-4da772bd-2940-4f69-a562-46d09f981460",
+        "chunk-a16ef152-e357-43b1-bfdf-b816a4a0a3aa"
+      ],
+      "goldKeywordCoverage": 0.5,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-a16ef152-e357-43b1-bfdf-b816a4a0a3aa",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 8,
+            "pageEnd": 8,
+            "vectorScore": 0.7896964,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t8 \t—\n为 \t65 \t分。其中专业型硕士研究生工程实践的课程不计入课业成\n绩中。\n（3）学术科研与专业实践成果\n①学术论文、著作\n论文分类以《人工智能学院学术论文评价办法（试行）》为\n准，计分标准如下：\n论文类别 \t第一作者 \t第二作者 \t第三作者\nT \t类 \t100 \t40 \t10\nA \t类 \t50 \t20 \t5\nB \t类 \t30 \t12 \t3\nC"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-823128a5-e8b1-4001-8761-9aa39f4d814d",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7040645,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n（一）\t学院研究生国家奖助学金评审工作小组负责研究生学\n业奖学金初评工作，党政主要领导任组长，小组成员包括学院分\n管人才培养工作和学生工作的院领导、专家学者代表、学院辅导\n员代表、教务员代表、学生代表等。\n（二）\t各年级成立研究生学业奖学金评优工作小组，由研究\n生辅导员、班团干部、学生代表组成，负责对研究生个人申请材\n料的复核、计分和汇总等工"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-4da772bd-2940-4f69-a562-46d09f981460",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.69980413,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t7 \t—\n因无故缺勤组会等情况受导师投诉 \t1 \t次 \t20\n不遵守课堂或实验室纪律（不服从管理、喧\n闹、周一至周五在实验室玩游戏等影响他人\n）1 \t次\n10\n以 学 院 的 文\n字 或 公 开 视\n频 等 记 录 为\n准\n年度心理测评未完成 \t10\n无故夜不归寝 \t1 \t次 \t10\n课堂无故缺勤 \t1 \t次 \t5\n无故不参与班集体、党支部等活动 \t1"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-a16ef152-e357-43b1-bfdf-b816a4a0a3aa",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 8,
+            "pageEnd": 8,
+            "vectorScore": 0.7896964,
+            "bm25Score": 12.359355019914979,
+            "rrfScore": 0.032266458495966696,
+            "relevant": true,
+            "snippet": "— \t8 \t—\n为 \t65 \t分。其中专业型硕士研究生工程实践的课程不计入课业成\n绩中。\n（3）学术科研与专业实践成果\n①学术论文、著作\n论文分类以《人工智能学院学术论文评价办法（试行）》为\n准，计分标准如下：\n论文类别 \t第一作者 \t第二作者 \t第三作者\nT \t类 \t100 \t40 \t10\nA \t类 \t50 \t20 \t5\nB \t类 \t30 \t12 \t3\nC"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-4da772bd-2940-4f69-a562-46d09f981460",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.69980413,
+            "bm25Score": 19.772173375490436,
+            "rrfScore": 0.032266458495966696,
+            "relevant": true,
+            "snippet": "— \t7 \t—\n因无故缺勤组会等情况受导师投诉 \t1 \t次 \t20\n不遵守课堂或实验室纪律（不服从管理、喧\n闹、周一至周五在实验室玩游戏等影响他人\n）1 \t次\n10\n以 学 院 的 文\n字 或 公 开 视\n频 等 记 录 为\n准\n年度心理测评未完成 \t10\n无故夜不归寝 \t1 \t次 \t10\n课堂无故缺勤 \t1 \t次 \t5\n无故不参与班集体、党支部等活动 \t1"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.69655466,
+            "bm25Score": 16.658521864261406,
+            "rrfScore": 0.031754032258064516,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          }
+        ]
+      }
+    },
+    {
+      "id": "xy-007",
+      "question": "学业奖学金科研计分中，T类论文第二作者能加多少分？论文作者最多排到第几名才加分？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [
+        8
+      ],
+      "goldChunkIds": [
+        "chunk-a16ef152-e357-43b1-bfdf-b816a4a0a3aa"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.6959967,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-60d44461-b259-4b56-bbc1-b3d79bc90a08",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 11,
+            "pageEnd": 11,
+            "vectorScore": 0.6817949999999999,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t11 \t—\n授权。\n获得实质审查通知书的发明专利加 \t5 \t分，获得授权的发明专\n利加 \t15 \t分。发明专利加分最多计 \t2 \t项。\n专利成果加分仅限专业型硕士研究生。\n（4）社会实践与服务社会\n①研究生在校期间担任主要学生干部或学生社团主要干\n部，学院评审工作小组审核评定后按照以下标准给予加分：\n校级 \t院级 \t备注\n担 任 主 要\n学生干部\n主 "
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-c357932f-21b0-46f5-9482-2752df10198b",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 13,
+            "pageEnd": 13,
+            "vectorScore": 0.68049318,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t13 \t—\n奖、二等奖、三等奖和优秀奖分别加 \t6 \t分、5 \t分、4 \t分、3 \t分；\n国家级的获奖按校级的 \t2 \t倍计分（四人及以上获团体奖个人按\n50％加分）；院级一等奖、二等奖、三等奖和优秀奖分别加 \t4\n分、3 \t分、2 \t分、1 \t分；省级的获奖按校级的 \t2 \t倍计分（四人及\n以上获团体奖个人按 \t50％加分）；对于获奖结果不区分名次和"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-a16ef152-e357-43b1-bfdf-b816a4a0a3aa",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 8,
+            "pageEnd": 8,
+            "vectorScore": 0.66887796,
+            "bm25Score": 24.24711744739637,
+            "rrfScore": 0.03177805800756621,
+            "relevant": true,
+            "snippet": "— \t8 \t—\n为 \t65 \t分。其中专业型硕士研究生工程实践的课程不计入课业成\n绩中。\n（3）学术科研与专业实践成果\n①学术论文、著作\n论文分类以《人工智能学院学术论文评价办法（试行）》为\n准，计分标准如下：\n论文类别 \t第一作者 \t第二作者 \t第三作者\nT \t类 \t100 \t40 \t10\nA \t类 \t50 \t20 \t5\nB \t类 \t30 \t12 \t3\nC"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-a57ae801-114e-4ce9-84af-d0f633d17b91",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 9,
+            "pageEnd": 9,
+            "vectorScore": 0.6767783199999999,
+            "bm25Score": 15.818899440482983,
+            "rrfScore": 0.03149801587301587,
+            "relevant": false,
+            "snippet": "— \t9 \t—\n学生校级立项、学生科技创新项目（由教务处、校团委、研\n究生院主办）、横向项目（到校经费大于等于 \t5 \t万）的主持人可\n获 \t20 \t分，参与同学不作加分。\n学生作为主持人申报省部级课题正式立项者加 \t50 \t分，作为\n主持人申报国家级课题正式立项者加 \t100 \t分。\n③专业竞赛\n专业竞赛是指中国国际大学生创新大赛、“挑战杯”全国\n大学生课"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-60d44461-b259-4b56-bbc1-b3d79bc90a08",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 11,
+            "pageEnd": 11,
+            "vectorScore": 0.6817949999999999,
+            "bm25Score": 11.224035459613905,
+            "rrfScore": 0.03128054740957967,
+            "relevant": false,
+            "snippet": "— \t11 \t—\n授权。\n获得实质审查通知书的发明专利加 \t5 \t分，获得授权的发明专\n利加 \t15 \t分。发明专利加分最多计 \t2 \t项。\n专利成果加分仅限专业型硕士研究生。\n（4）社会实践与服务社会\n①研究生在校期间担任主要学生干部或学生社团主要干\n部，学院评审工作小组审核评定后按照以下标准给予加分：\n校级 \t院级 \t备注\n担 任 主 要\n学生干部\n主 "
+          }
+        ]
+      }
+    },
+    {
+      "id": "xy-008",
+      "question": "学业奖学金计分时，C类专业竞赛一、二、三级奖项各多少分，每人最多计几项？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [
+        9
+      ],
+      "goldChunkIds": [
+        "chunk-a57ae801-114e-4ce9-84af-d0f633d17b91"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 3,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-c357932f-21b0-46f5-9482-2752df10198b",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 13,
+            "pageEnd": 13,
+            "vectorScore": 0.75126696,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t13 \t—\n奖、二等奖、三等奖和优秀奖分别加 \t6 \t分、5 \t分、4 \t分、3 \t分；\n国家级的获奖按校级的 \t2 \t倍计分（四人及以上获团体奖个人按\n50％加分）；院级一等奖、二等奖、三等奖和优秀奖分别加 \t4\n分、3 \t分、2 \t分、1 \t分；省级的获奖按校级的 \t2 \t倍计分（四人及\n以上获团体奖个人按 \t50％加分）；对于获奖结果不区分名次和"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.7302584,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-a57ae801-114e-4ce9-84af-d0f633d17b91",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 9,
+            "pageEnd": 9,
+            "vectorScore": 0.7229209,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t9 \t—\n学生校级立项、学生科技创新项目（由教务处、校团委、研\n究生院主办）、横向项目（到校经费大于等于 \t5 \t万）的主持人可\n获 \t20 \t分，参与同学不作加分。\n学生作为主持人申报省部级课题正式立项者加 \t50 \t分，作为\n主持人申报国家级课题正式立项者加 \t100 \t分。\n③专业竞赛\n专业竞赛是指中国国际大学生创新大赛、“挑战杯”全国\n大学生课"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-a57ae801-114e-4ce9-84af-d0f633d17b91",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 9,
+            "pageEnd": 9,
+            "vectorScore": 0.7229209,
+            "bm25Score": 25.011387172957484,
+            "rrfScore": 0.032266458495966696,
+            "relevant": true,
+            "snippet": "— \t9 \t—\n学生校级立项、学生科技创新项目（由教务处、校团委、研\n究生院主办）、横向项目（到校经费大于等于 \t5 \t万）的主持人可\n获 \t20 \t分，参与同学不作加分。\n学生作为主持人申报省部级课题正式立项者加 \t50 \t分，作为\n主持人申报国家级课题正式立项者加 \t100 \t分。\n③专业竞赛\n专业竞赛是指中国国际大学生创新大赛、“挑战杯”全国\n大学生课"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-c357932f-21b0-46f5-9482-2752df10198b",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 13,
+            "pageEnd": 13,
+            "vectorScore": 0.75126696,
+            "bm25Score": 10.660456895604016,
+            "rrfScore": 0.032018442622950824,
+            "relevant": false,
+            "snippet": "— \t13 \t—\n奖、二等奖、三等奖和优秀奖分别加 \t6 \t分、5 \t分、4 \t分、3 \t分；\n国家级的获奖按校级的 \t2 \t倍计分（四人及以上获团体奖个人按\n50％加分）；院级一等奖、二等奖、三等奖和优秀奖分别加 \t4\n分、3 \t分、2 \t分、1 \t分；省级的获奖按校级的 \t2 \t倍计分（四人及\n以上获团体奖个人按 \t50％加分）；对于获奖结果不区分名次和"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-b3a190ab-01f5-4f5e-b77a-6e182257dafd",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 5,
+            "vectorScore": 0.7302584,
+            "bm25Score": 10.773648882094918,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n制在读博士研究生人数的 \t20%，硕博连读研究生和直博生可优\n先评选。如果硕博连读研究生和直博生人数超过名额上限，则按\n照直博生、硕博连读研究生的次序依次评定，直博生按照入学成\n绩评定排名，硕博连读研究生按照硕士阶段的学业成绩排名。未\n获评一等学业奖学金的硕博连读研究生和直博生获得二等学业奖\n学金。其余博士研究生新生在设置比例范围内，依据入学"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yx-001",
+      "question": "优秀毕业研究生的评选对象是谁，一般在每年什么时候开展？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [
+        2
+      ],
+      "goldChunkIds": [
+        "chunk-7b3bdd95-3d69-4896-841d-d7e9e0ccc539"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.74995273,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-7b3bdd95-3d69-4896-841d-d7e9e0ccc539",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 1,
+            "pageEnd": 2,
+            "vectorScore": 0.7147771,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t1 \t—\n华南师范大学人工智能学院文件\n华师智院〔2025〕10号\n关于印发《人工智能学院优秀毕业生（研究生）\n评选实施办法（试行）》的通知\n学院各单位：\n经学院重组工作小组会议审定，现将《人工智能学院优秀\n毕业生（研究生）评选实施办法（试行）》印发给你们，请遵\n照执行。\n华南师范大学人工智能学院\n2025 \t年 \t9 \t月 \t5 \t日\n\n— \t2 \t"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.67480558,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.74995273,
+            "bm25Score": 5.744272637265949,
+            "rrfScore": 0.03252247488101534,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-7b3bdd95-3d69-4896-841d-d7e9e0ccc539",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 1,
+            "pageEnd": 2,
+            "vectorScore": 0.7147771,
+            "bm25Score": 10.89210306460039,
+            "rrfScore": 0.03252247488101534,
+            "relevant": true,
+            "snippet": "— \t1 \t—\n华南师范大学人工智能学院文件\n华师智院〔2025〕10号\n关于印发《人工智能学院优秀毕业生（研究生）\n评选实施办法（试行）》的通知\n学院各单位：\n经学院重组工作小组会议审定，现将《人工智能学院优秀\n毕业生（研究生）评选实施办法（试行）》印发给你们，请遵\n照执行。\n华南师范大学人工智能学院\n2025 \t年 \t9 \t月 \t5 \t日\n\n— \t2 \t"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.67480558,
+            "bm25Score": 3.6514575501503708,
+            "rrfScore": 0.03057889822595705,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yx-002",
+      "question": "优秀毕业研究生的推荐名额如何计算，不足一人的专业怎么办？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [
+        2
+      ],
+      "goldChunkIds": [
+        "chunk-7b3bdd95-3d69-4896-841d-d7e9e0ccc539"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": false,
+        "firstRelevantRank": null,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.6850001800000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.68265498,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.6787296,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 3,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.6850001800000001,
+            "bm25Score": 7.622990285351027,
+            "rrfScore": 0.03252247488101534,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-b4c48ca6-1c3b-4243-897f-6a4e15da61e9",
+            "documentName": "华南师范大学“广府人助学金”评选概述.docx",
+            "pageStart": 0,
+            "pageEnd": 0,
+            "vectorScore": 0.68265498,
+            "bm25Score": 6.7130662823536635,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "学习成绩优秀，上一学年度在该年级专业排名前5%。\n\n1. 资助设置\n\n“广府人助学金”共设三个类别，总名额50个，资助标准均为每人2000元/年。\n\n“广府人助学金”类别设置\n\n奖项类别\n\n资助名额\n\n面向对象\n\n青云奖\n\n20人\n\n通过当年度认定的家庭经济困难本科生\n\n创新奖\n\n15人\n\n全体学生\n\n学业奖\n\n15人\n\n全体学生\n\n各学院的推荐名额依据学院"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-7b3bdd95-3d69-4896-841d-d7e9e0ccc539",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 1,
+            "pageEnd": 2,
+            "vectorScore": 0.6680480799999999,
+            "bm25Score": 13.547312349094401,
+            "rrfScore": 0.03177805800756621,
+            "relevant": true,
+            "snippet": "— \t1 \t—\n华南师范大学人工智能学院文件\n华师智院〔2025〕10号\n关于印发《人工智能学院优秀毕业生（研究生）\n评选实施办法（试行）》的通知\n学院各单位：\n经学院重组工作小组会议审定，现将《人工智能学院优秀\n毕业生（研究生）评选实施办法（试行）》印发给你们，请遵\n照执行。\n华南师范大学人工智能学院\n2025 \t年 \t9 \t月 \t5 \t日\n\n— \t2 \t"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yx-003",
+      "question": "获得哪些高层次荣誉的毕业研究生可以直接取得优秀毕业生资格，并且不占学院名额？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [
+        3
+      ],
+      "goldChunkIds": [
+        "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.72401166,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7203390000000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-058fc688-9b8c-4bd9-b99f-d85f2b3cec22",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 6,
+            "vectorScore": 0.6931976,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n为自己或者他人谋取不正当利益的个人，取消其评奖资格，并\n视情节给予批评教育或者纪律处分。\n（三）获得“优秀毕业生”称号者，若出现不能按期正常\n毕业或不符合评选条件的情况，撤销其荣誉称号，收回荣誉证\n书。\n（四）获得“优秀毕业生”称号者有义务协助学院进行榜\n样宣传。\n（五）本办法自通过之日起施行。\n（六）本办法由学院学生奖助工作小组负责解释，未"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7203390000000001,
+            "bm25Score": 13.316092474529144,
+            "rrfScore": 0.03252247488101534,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-058fc688-9b8c-4bd9-b99f-d85f2b3cec22",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 6,
+            "vectorScore": 0.6931976,
+            "bm25Score": 11.003976850449428,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t5 \t—\n为自己或者他人谋取不正当利益的个人，取消其评奖资格，并\n视情节给予批评教育或者纪律处分。\n（三）获得“优秀毕业生”称号者，若出现不能按期正常\n毕业或不符合评选条件的情况，撤销其荣誉称号，收回荣誉证\n书。\n（四）获得“优秀毕业生”称号者有义务协助学院进行榜\n样宣传。\n（五）本办法自通过之日起施行。\n（六）本办法由学院学生奖助工作小组负责解释，未"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.72401166,
+            "bm25Score": 8.532839337710772,
+            "rrfScore": 0.03177805800756621,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yx-004",
+      "question": "参评优秀毕业研究生，对学习成绩排名的基本要求是什么？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [
+        3
+      ],
+      "goldChunkIds": [
+        "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 3,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7741368399999999,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7738576500000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7491163599999999,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 3,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7738576500000001,
+            "bm25Score": 10.369797918401705,
+            "rrfScore": 0.03252247488101534,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7741368399999999,
+            "bm25Score": 7.352678797571636,
+            "rrfScore": 0.032018442622950824,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.7491163599999999,
+            "bm25Score": 7.649756992334274,
+            "rrfScore": 0.031746031746031744,
+            "relevant": true,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yx-005",
+      "question": "除基本条件外，参评优秀毕业研究生还需要满足哪些附加条件之一？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [
+        3,
+        4
+      ],
+      "goldChunkIds": [
+        "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc"
+      ],
+      "goldKeywordCoverage": 0.8,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.78447556,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7809646100000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.75895607,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 2,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.75895607,
+            "bm25Score": 11.546979565420125,
+            "rrfScore": 0.032266458495966696,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7809646100000001,
+            "bm25Score": 9.504286938614824,
+            "rrfScore": 0.03225806451612903,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.78447556,
+            "bm25Score": 7.899036781799962,
+            "rrfScore": 0.032018442622950824,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yx-006",
+      "question": "有课程不及格或重修记录，还能参评优秀毕业研究生吗？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [
+        4
+      ],
+      "goldChunkIds": [
+        "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7397022200000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.70354038,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.68260378,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7397022200000001,
+            "bm25Score": 9.090696910460021,
+            "rrfScore": 0.03252247488101534,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-989e9aa7-1283-4407-8d3f-bea53ebb1a14",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.70354038,
+            "bm25Score": 8.301470535289626,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n3．遵守宪法和法律，遵守学校和学院的规章制度；\n4．诚实守信，道德品质优良；\n5．学习成绩优异，科研能力显著，发展潜力突出；或者学\n习成绩优良，在国际、全国性大学生高水平专业竞赛中成绩优\n秀，发展潜力突出；或者学习成绩优良，担任主要学生骨干及参\n与组织学校各类活动和社会实践，在服务社会方面作出突出贡\n献者。\n（二）有下列情况之一者，不具备当年"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-3a3fe1a5-846e-495a-b6bd-da9810a4f455",
+            "documentName": "学业奖学金评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.68260378,
+            "bm25Score": 6.639174429035364,
+            "rrfScore": 0.03125763125763126,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n4．诚实守信，道德品质优良；\n5．积极参与科学研究和社会实践。\n（二）\t有以下情节之一者，不具备当年研究生学业奖学金参\n评资格：\n1．参评学年内，保留学籍和休学超过六个月者；\n2．参评学年内，有课程考试不及格者；\n3．在学校规定时间内未完成注册、缴费手续者。\n五、评审标准\n（一）\t一年级新生评审标准\n1.硕士研究生新生一等学业奖学金比例不超过"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yx-007",
+      "question": "优秀毕业研究生评选在学院和学校分别至少公示多少天？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [
+        4
+      ],
+      "goldChunkIds": [
+        "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7520586300000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-42cfab22-0cee-4d81-9664-61587e6ef602",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.7445764,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t7 \t—\n示期间，学生可以书面形式实名向学院提出申诉，学院应在 \t3\n个工作日内予以答复。公示无异议后上报党委研究生工作部汇\n总、审核。\n（四）\t学校评定\n学校研究生评审委员会评审并提出研究生国家奖学金建议名\n单，在全校范围内进行不少于 \t5 \t个工作日的公示，在公示期间，\n学生可以书面形式实名向党委研究生工作部提出申诉，党委研究\n生工作部应在 \t3 "
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-7b3bdd95-3d69-4896-841d-d7e9e0ccc539",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 1,
+            "pageEnd": 2,
+            "vectorScore": 0.7096001000000001,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t1 \t—\n华南师范大学人工智能学院文件\n华师智院〔2025〕10号\n关于印发《人工智能学院优秀毕业生（研究生）\n评选实施办法（试行）》的通知\n学院各单位：\n经学院重组工作小组会议审定，现将《人工智能学院优秀\n毕业生（研究生）评选实施办法（试行）》印发给你们，请遵\n照执行。\n华南师范大学人工智能学院\n2025 \t年 \t9 \t月 \t5 \t日\n\n— \t2 \t"
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.7520586300000001,
+            "bm25Score": 9.623883934948424,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-7b3bdd95-3d69-4896-841d-d7e9e0ccc539",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 1,
+            "pageEnd": 2,
+            "vectorScore": 0.7096001000000001,
+            "bm25Score": 6.620582808449317,
+            "rrfScore": 0.03200204813108039,
+            "relevant": false,
+            "snippet": "— \t1 \t—\n华南师范大学人工智能学院文件\n华师智院〔2025〕10号\n关于印发《人工智能学院优秀毕业生（研究生）\n评选实施办法（试行）》的通知\n学院各单位：\n经学院重组工作小组会议审定，现将《人工智能学院优秀\n毕业生（研究生）评选实施办法（试行）》印发给你们，请遵\n照执行。\n华南师范大学人工智能学院\n2025 \t年 \t9 \t月 \t5 \t日\n\n— \t2 \t"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-42cfab22-0cee-4d81-9664-61587e6ef602",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.7445764,
+            "bm25Score": 6.0951319681717475,
+            "rrfScore": 0.031754032258064516,
+            "relevant": false,
+            "snippet": "— \t7 \t—\n示期间，学生可以书面形式实名向学院提出申诉，学院应在 \t3\n个工作日内予以答复。公示无异议后上报党委研究生工作部汇\n总、审核。\n（四）\t学校评定\n学校研究生评审委员会评审并提出研究生国家奖学金建议名\n单，在全校范围内进行不少于 \t5 \t个工作日的公示，在公示期间，\n学生可以书面形式实名向党委研究生工作部提出申诉，党委研究\n生工作部应在 \t3 "
+          }
+        ]
+      }
+    },
+    {
+      "id": "yx-008",
+      "question": "获评优秀毕业研究生后如果不能按时毕业，称号会怎么处理？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [
+        5
+      ],
+      "goldChunkIds": [
+        "chunk-058fc688-9b8c-4bd9-b99f-d85f2b3cec22"
+      ],
+      "goldKeywordCoverage": 1,
+      "vectorOnly": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-058fc688-9b8c-4bd9-b99f-d85f2b3cec22",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 6,
+            "vectorScore": 0.758838,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": true,
+            "snippet": "— \t5 \t—\n为自己或者他人谋取不正当利益的个人，取消其评奖资格，并\n视情节给予批评教育或者纪律处分。\n（三）获得“优秀毕业生”称号者，若出现不能按期正常\n毕业或不符合评选条件的情况，撤销其荣誉称号，收回荣誉证\n书。\n（四）获得“优秀毕业生”称号者有义务协助学院进行榜\n样宣传。\n（五）本办法自通过之日起施行。\n（六）本办法由学院学生奖助工作小组负责解释，未"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.75039178,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-42cfab22-0cee-4d81-9664-61587e6ef602",
+            "documentName": "国奖评选要求.pdf",
+            "pageStart": 7,
+            "pageEnd": 7,
+            "vectorScore": 0.7139393,
+            "bm25Score": null,
+            "rrfScore": null,
+            "relevant": false,
+            "snippet": "— \t7 \t—\n示期间，学生可以书面形式实名向学院提出申诉，学院应在 \t3\n个工作日内予以答复。公示无异议后上报党委研究生工作部汇\n总、审核。\n（四）\t学校评定\n学校研究生评审委员会评审并提出研究生国家奖学金建议名\n单，在全校范围内进行不少于 \t5 \t个工作日的公示，在公示期间，\n学生可以书面形式实名向党委研究生工作部提出申诉，党委研究\n生工作部应在 \t3 "
+          }
+        ]
+      },
+      "hybrid": {
+        "hit": true,
+        "firstRelevantRank": 1,
+        "topResults": [
+          {
+            "rank": 1,
+            "chunkId": "chunk-058fc688-9b8c-4bd9-b99f-d85f2b3cec22",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 5,
+            "pageEnd": 6,
+            "vectorScore": 0.758838,
+            "bm25Score": 10.84317220542144,
+            "rrfScore": 0.03278688524590164,
+            "relevant": true,
+            "snippet": "— \t5 \t—\n为自己或者他人谋取不正当利益的个人，取消其评奖资格，并\n视情节给予批评教育或者纪律处分。\n（三）获得“优秀毕业生”称号者，若出现不能按期正常\n毕业或不符合评选条件的情况，撤销其荣誉称号，收回荣誉证\n书。\n（四）获得“优秀毕业生”称号者有义务协助学院进行榜\n样宣传。\n（五）本办法自通过之日起施行。\n（六）本办法由学院学生奖助工作小组负责解释，未"
+          },
+          {
+            "rank": 2,
+            "chunkId": "chunk-355bb0d5-7722-415a-951b-5f79f8497fcc",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 4,
+            "pageEnd": 4,
+            "vectorScore": 0.75039178,
+            "bm25Score": 8.205630600702106,
+            "rrfScore": 0.031754032258064516,
+            "relevant": false,
+            "snippet": "— \t4 \t—\n（3）积极响应国家号召献身国防事业或自愿到西部、艰苦\n边远地区就业的毕业生。\n（三）在学期间有以下情况之一者不得参评：\n1.违反国家法律、校纪校规者；\n2.存在学术不端及不诚信行为者；\n3.考试成绩不合格或重修者；\n4.恶意拖欠学费、住宿费者。\n三、评选程序\n（一）学生申请\n符合申报条件的研究生，向学院提出申请。\n（二）学院评审\n学院学生奖助"
+          },
+          {
+            "rank": 3,
+            "chunkId": "chunk-91255847-7f0f-4bc4-9c7f-8a0284609970",
+            "documentName": "优秀毕业生评选.pdf",
+            "pageStart": 3,
+            "pageEnd": 3,
+            "vectorScore": 0.6576844,
+            "bm25Score": 9.081198247227366,
+            "rrfScore": 0.031054405392392875,
+            "relevant": false,
+            "snippet": "— \t3 \t—\n在校期间，获“五一劳动奖章”“三八红旗手”“青年五\n四奖章”“大学生年度人物（含提名奖）”、入选国家奖学金\n获奖学生代表名录、“优秀学生干部”“优秀共产党员”“优\n秀共青团员”“优秀共青团干部”“百佳团支部书记”“中国\n青少年科技创新奖”“中国大学生自强之星”全国性荣誉称号\n者或获得“挑战杯”全国大学生课外学术科技作品竞赛、“挑\n战杯”中国大"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "name": "奖助学金与优秀毕业生 RAG 检索评测集",
+  "description": "基于 4 份真实制度文档人工构建的正例问题。referenceAnswer 仅供人工复核，Recall@3 只评估检索结果是否命中 goldEvidence。",
+  "metric": {
+    "name": "Recall@3",
+    "k": 3,
+    "definition": "Top 3 检索结果中至少有一个切片同时满足 expectedDocument、relevantPages（如有）和 evidenceKeywords 约束，则该题记为命中。",
+    "questionCount": 32
+  },
+  "documents": [
+    "华南师范大学“广府人助学金”评选概述.docx",
+    "国奖评选要求.pdf",
+    "学业奖学金评选.pdf",
+    "优秀毕业生评选.pdf"
+  ],
+  "cases": [
+    {
+      "id": "gf-001",
+      "question": "哪些学生可以申请广府人助学金，第二学位学生能申请吗？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "evidenceKeywords": ["佛山校区南海校园", "全日制", "第二学位"],
+      "referenceAnswer": "申请对象为佛山校区南海校园的全日制本科生和研究生，不包括第二学位学生。",
+      "category": "申请资格",
+      "difficulty": "easy"
+    },
+    {
+      "id": "gf-002",
+      "question": "广府人助学金分哪几类，每类有多少名额、每人多少钱？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "evidenceKeywords": ["青云奖", "创新奖", "学业奖", "2000"],
+      "referenceAnswer": "分青云奖、创新奖和学业奖；名额分别为20人、15人、15人，每人每年2000元。",
+      "category": "奖项标准",
+      "difficulty": "easy"
+    },
+    {
+      "id": "gf-003",
+      "question": "本科生申请广府人助学金青云奖，对绩点和重修有什么要求？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "evidenceKeywords": ["青云奖", "3.0", "重修"],
+      "referenceAnswer": "上一学年平均学分绩点原则上须在3.0以上，且无重修课程。",
+      "category": "青云奖条件",
+      "difficulty": "easy"
+    },
+    {
+      "id": "gf-004",
+      "question": "已经获得其他资助的家庭经济困难本科生，还能申请青云奖吗？有哪些例外？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "evidenceKeywords": ["原则上不重复参评", "国家助学金", "临时困难补助"],
+      "referenceAnswer": "原则上，已经获得政府或学校其他资助的学生不能重复申请；国家助学金和临时困难补助除外。",
+      "category": "青云奖条件",
+      "difficulty": "medium"
+    },
+    {
+      "id": "gf-005",
+      "question": "本科生申请广府人助学金创新奖，需要达到什么绩点和获奖条件？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "evidenceKeywords": ["创新奖", "3.5", "一等奖"],
+      "referenceAnswer": "上一学年平均学分绩点须在3.5以上，并在上一学年获得校级创新奖一等奖及以上奖项。",
+      "category": "创新奖条件",
+      "difficulty": "easy"
+    },
+    {
+      "id": "gf-006",
+      "question": "广府人助学金的学业奖要求成绩排名达到什么水平？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "evidenceKeywords": ["学业奖", "前5%"],
+      "referenceAnswer": "上一学年学习成绩排名须位于本专业本年级前5%。",
+      "category": "学业奖条件",
+      "difficulty": "easy"
+    },
+    {
+      "id": "gf-007",
+      "question": "广府人助学金由学生本人申请的截止日期是什么时候？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "evidenceKeywords": ["学生申请", "6月9日"],
+      "referenceAnswer": "学生申请截止日期为6月9日。",
+      "category": "申报流程",
+      "difficulty": "easy"
+    },
+    {
+      "id": "gf-008",
+      "question": "获得广府人助学金后如果学位论文答辩没通过，奖项和资助怎么处理？",
+      "expectedDocument": "华南师范大学“广府人助学金”评选概述.docx",
+      "relevantPages": [],
+      "evidenceKeywords": ["学位论文答辩", "收回", "证书", "奖金"],
+      "referenceAnswer": "若学位论文答辩未通过、不能按期正常毕业或离校前违规，学校将收回已颁发的证书和奖金。",
+      "category": "资格撤销",
+      "difficulty": "medium"
+    },
+    {
+      "id": "gj-001",
+      "question": "研究生国家奖学金对学术学位和专业学位研究生分别侧重考察什么？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [2],
+      "evidenceKeywords": ["学术型研究生", "科研创新能力", "专业学位研究生", "专业实践能力"],
+      "referenceAnswer": "学术学位研究生侧重科研创新能力和成果，专业学位研究生侧重专业实践能力和适应专业岗位的综合素质。",
+      "category": "评审导向",
+      "difficulty": "medium"
+    },
+    {
+      "id": "gj-002",
+      "question": "国家奖学金评审时，成果认定的时间范围是怎么规定的？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [2],
+      "evidenceKeywords": ["上年9月1日", "本年9月1日"],
+      "referenceAnswer": "一般认定上一年度9月1日至本年度9月1日期间取得的成果，如当年通知另有规定则按通知执行。",
+      "category": "成果期限",
+      "difficulty": "medium"
+    },
+    {
+      "id": "gj-003",
+      "question": "申请研究生国家奖学金后，还能同时申请其他研究生奖助项目吗？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [2],
+      "evidenceKeywords": ["同时申请", "研究生学业奖学金", "研究生国家助学金"],
+      "referenceAnswer": "可以，符合条件的学生可同时申请国家奖学金和其他研究生奖助学金。",
+      "category": "兼得规则",
+      "difficulty": "easy"
+    },
+    {
+      "id": "gj-004",
+      "question": "博士和硕士研究生国家奖学金每人每年分别奖励多少钱？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [3],
+      "evidenceKeywords": ["博士研究生", "30000", "硕士研究生", "20000"],
+      "referenceAnswer": "博士研究生每人每年30000元，硕士研究生每人每年20000元。",
+      "category": "奖励标准",
+      "difficulty": "easy"
+    },
+    {
+      "id": "gj-005",
+      "question": "硕博连读学生从哪一年开始按博士研究生身份申请国家奖学金？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [3],
+      "evidenceKeywords": ["硕博连读", "选修博士研究生课程阶段", "博士研究生身份"],
+      "referenceAnswer": "进入博士学习阶段后，按照博士研究生身份申请和参评。",
+      "category": "身份认定",
+      "difficulty": "medium"
+    },
+    {
+      "id": "gj-006",
+      "question": "哪些情况会让研究生失去当年国家奖学金参评资格？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [4],
+      "evidenceKeywords": ["保留学籍和休学超过六个月", "课程考试不及格", "未完成注册、缴费手续"],
+      "referenceAnswer": "包括休学或保留学籍累计超过半年、课程考试不及格，以及无正当理由未按时注册或缴纳学费等情形。",
+      "category": "否决条件",
+      "difficulty": "medium"
+    },
+    {
+      "id": "gj-007",
+      "question": "用论文申请国家奖学金时，对作者顺序和第一署名单位有什么要求？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [4, 5],
+      "evidenceKeywords": ["第一作者", "论文作者第一单位", "华南师范大学人工智能学院"],
+      "referenceAnswer": "原则上应为第一作者，且论文第一署名单位须为华南师范大学人工智能学院。",
+      "category": "成果认定",
+      "difficulty": "medium"
+    },
+    {
+      "id": "gj-008",
+      "question": "研究生国家奖学金获奖名单在学校层面要公示多久，奖学金最迟何时发放？",
+      "expectedDocument": "国奖评选要求.pdf",
+      "relevantPages": [7],
+      "evidenceKeywords": ["不少于5个工作日", "12月31日前"],
+      "referenceAnswer": "学校层面公示不少于5个工作日，并于当年12月31日前一次性发放奖学金。",
+      "category": "公示与发放",
+      "difficulty": "medium"
+    },
+    {
+      "id": "xy-001",
+      "question": "研究生学业奖学金认定成果的起止时间是什么？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [2],
+      "evidenceKeywords": ["上年9月1日", "本年8月31日"],
+      "referenceAnswer": "认定上一年度9月1日至本年度8月31日期间取得的成果。",
+      "category": "成果期限",
+      "difficulty": "easy"
+    },
+    {
+      "id": "xy-002",
+      "question": "硕士研究生学业奖学金一、二、三等奖分别多少钱，占比分别是多少？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [3],
+      "evidenceKeywords": ["1.0万元", "0.8万元", "0.5万元", "10%", "30%", "60%"],
+      "referenceAnswer": "一等奖10000元、占10%；二等奖8000元、占30%；三等奖5000元、占60%。",
+      "category": "奖励标准",
+      "difficulty": "easy"
+    },
+    {
+      "id": "xy-003",
+      "question": "博士研究生学业奖学金三个等级的金额和比例分别是什么？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [3],
+      "evidenceKeywords": ["1.8万元", "1.5万元", "1.0万元", "20%", "30%", "50%"],
+      "referenceAnswer": "一等奖18000元、占20%；二等奖15000元、占30%；三等奖10000元、占50%。",
+      "category": "奖励标准",
+      "difficulty": "easy"
+    },
+    {
+      "id": "xy-004",
+      "question": "硕士一年级新生获得学业奖学金一等奖的比例上限是多少，哪些人优先？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [4],
+      "evidenceKeywords": ["一年级新生", "10%", "推免生"],
+      "referenceAnswer": "一等奖比例不超过参评人数的10%，推荐免试研究生优先。",
+      "category": "新生评审",
+      "difficulty": "medium"
+    },
+    {
+      "id": "xy-005",
+      "question": "二年级及以上硕士生评学业奖学金时，思想品德、课业、科研实践和社会服务各占多少？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [5],
+      "evidenceKeywords": ["学风道德表现", "10%", "课业成绩", "50%", "学术科研/专业实践成果", "20%", "社会服务与实践"],
+      "referenceAnswer": "思想品德10%、课业成绩50%、学术科研与专业实践20%、社会服务20%。",
+      "category": "计分权重",
+      "difficulty": "medium"
+    },
+    {
+      "id": "xy-006",
+      "question": "研究生学业奖学金的课业平均成绩怎么计算，专业型硕士的工程实践课算不算？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [7, 8],
+      "evidenceKeywords": ["对应学分", "总学分", "工程实践", "不计入课业成绩"],
+      "referenceAnswer": "课业成绩按课程成绩和学分计算加权平均；专业型硕士的工程实践课程不计入课业成绩。",
+      "category": "成绩计算",
+      "difficulty": "medium"
+    },
+    {
+      "id": "xy-007",
+      "question": "学业奖学金科研计分中，T类论文第二作者能加多少分？论文作者最多排到第几名才加分？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [8],
+      "evidenceKeywords": ["T类", "40", "排序前三"],
+      "referenceAnswer": "T类论文第二作者加40分，只有实际排序前三的作者可以加分。",
+      "category": "科研计分",
+      "difficulty": "medium"
+    },
+    {
+      "id": "xy-008",
+      "question": "学业奖学金计分时，C类专业竞赛一、二、三级奖项各多少分，每人最多计几项？",
+      "expectedDocument": "学业奖学金评选.pdf",
+      "relevantPages": [9],
+      "evidenceKeywords": ["C类", "40", "20", "10", "最多2项"],
+      "referenceAnswer": "C类竞赛一、二、三级奖项分别为40分、20分、10分，每人最多2项加分。",
+      "category": "竞赛计分",
+      "difficulty": "medium"
+    },
+    {
+      "id": "yx-001",
+      "question": "优秀毕业研究生的评选对象是谁，一般在每年什么时候开展？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [2],
+      "evidenceKeywords": ["全日制应届研究生毕业生", "每年5月"],
+      "referenceAnswer": "评选对象为全日制应届毕业研究生，一般于每年5月开展。",
+      "category": "评选范围",
+      "difficulty": "easy"
+    },
+    {
+      "id": "yx-002",
+      "question": "优秀毕业研究生的推荐名额如何计算，不足一人的专业怎么办？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [2],
+      "evidenceKeywords": ["8%", "不足1人的按1人推荐"],
+      "referenceAnswer": "原则上不超过本专业应届毕业研究生人数的8%；按比例不足1人的专业可推荐1人。",
+      "category": "推荐名额",
+      "difficulty": "medium"
+    },
+    {
+      "id": "yx-003",
+      "question": "获得哪些高层次荣誉的毕业研究生可以直接取得优秀毕业生资格，并且不占学院名额？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [3],
+      "evidenceKeywords": ["直接获得", "国家级", "不占"],
+      "referenceAnswer": "获得文件列明的全国性荣誉称号，或作为三项指定创新创业竞赛国家级最高等级奖项的项目负责人，可直接获得推荐资格且不占学院名额。",
+      "category": "直接认定",
+      "difficulty": "medium"
+    },
+    {
+      "id": "yx-004",
+      "question": "参评优秀毕业研究生，对学习成绩排名的基本要求是什么？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [3],
+      "evidenceKeywords": ["平均学分绩点", "50%"],
+      "referenceAnswer": "学习成绩须位于本专业前50%。",
+      "category": "基本条件",
+      "difficulty": "easy"
+    },
+    {
+      "id": "yx-005",
+      "question": "除基本条件外，参评优秀毕业研究生还需要满足哪些附加条件之一？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [3, 4],
+      "evidenceKeywords": ["研究生学业奖学金", "荣誉称号", "国防事业", "西部", "艰苦边远地区"],
+      "referenceAnswer": "还须满足下列之一：获研究生学业奖学金一等奖；获二等奖及以上且获得规定的校级及以上荣誉；或自愿到国防建设、西部及边远地区等就业。",
+      "category": "附加条件",
+      "difficulty": "hard"
+    },
+    {
+      "id": "yx-006",
+      "question": "有课程不及格或重修记录，还能参评优秀毕业研究生吗？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [4],
+      "evidenceKeywords": ["考试成绩不合格", "重修者", "不得参评"],
+      "referenceAnswer": "不能，课程考试不及格或有重修记录属于取消参评资格的情形。",
+      "category": "否决条件",
+      "difficulty": "easy"
+    },
+    {
+      "id": "yx-007",
+      "question": "优秀毕业研究生评选在学院和学校分别至少公示多少天？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [4],
+      "evidenceKeywords": ["3个工作日", "5个工作日"],
+      "referenceAnswer": "学院公示不少于3个工作日，学校公示不少于5个工作日。",
+      "category": "评选流程",
+      "difficulty": "easy"
+    },
+    {
+      "id": "yx-008",
+      "question": "获评优秀毕业研究生后如果不能按时毕业，称号会怎么处理？",
+      "expectedDocument": "优秀毕业生评选.pdf",
+      "relevantPages": [5],
+      "evidenceKeywords": ["不能按期正常毕业", "撤销其荣誉称号"],
+      "referenceAnswer": "若不能按时毕业或不再符合评选条件，学校将撤销优秀毕业研究生荣誉称号。",
+      "category": "资格撤销",
+      "difficulty": "medium"
+    }
+  ]
+}

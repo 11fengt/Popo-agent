@@ -9,17 +9,20 @@
     </div>
 
     <label class="upload-dropzone">
-      <input accept=".md,.markdown,.txt,.json" multiple type="file" @change="handleFiles" />
+      <input accept=".md,.markdown,.txt,.pdf,.docx" multiple type="file" @change="handleFiles" />
       <strong>上传文件</strong>
-      <span>后端会自动分块、生成 embedding，并建立向量索引</span>
-      <small>若网络无法访问 Qwen，会明确提示是 embedding / 连接失败。</small>
+      <span>支持 Markdown、TXT、文本型 PDF 和 Word（.docx）</span>
+      <small>后端会按标题、段落和页码切片</small>
     </label>
 
     <div v-if="documents.length" class="knowledge-list">
       <article v-for="doc in documents" :key="doc.id" class="knowledge-item">
-        <div>
+        <div class="knowledge-item-body">
           <strong>{{ doc.name }}</strong>
-          <p>{{ formatTime(doc.createdAt) }}</p>
+          <p>
+            {{ formatTime(doc.createdAt) }}
+            <span v-if="doc.chunkCount"> · {{ doc.chunkCount }} 个切片</span>
+          </p>
         </div>
         <button class="inline-link" @click="$emit('remove', doc.id)">移除</button>
       </article>

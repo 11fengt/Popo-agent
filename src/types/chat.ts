@@ -8,6 +8,13 @@ export interface Citation {
   snippet: string;
   source: string;
   score?: number;
+  retrieval?: {
+    vectorRank: number | null;
+    vectorScore: number | null;
+    keywordRank: number | null;
+    bm25Score: number | null;
+    rrfScore: number;
+  };
 }
 
 export interface ToolInvocation {
@@ -40,6 +47,8 @@ export interface KnowledgeDocument {
   id: string;
   name: string;
   createdAt: number;
+  fileType?: string;
+  chunkCount?: number;
 }
 
 export interface BackendStreamEvent {
@@ -68,4 +77,6 @@ export interface ServerDocumentResponse {
   id: string;
   name: string;
   createdAt: number;
+  fileType?: string;
+  chunkCount?: number;
 }

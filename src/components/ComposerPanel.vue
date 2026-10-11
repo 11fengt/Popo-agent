@@ -6,9 +6,9 @@
         <span class="status-badge soft">{{ documentCount }} 份文档</span>
       </div>
       <div class="composer-toolbox">
-        <button class="tool-button" :class="[`voice-${voiceStatus}`]" :disabled="!voiceSupported" @click="$emit('voice')">
+        <!-- <button class="tool-button" :class="[`voice-${voiceStatus}`]" :disabled="!voiceSupported" @click="$emit('voice')">
           {{ voiceButtonLabel }}
-        </button>
+        </button> -->
       </div>
     </div>
 
